@@ -1,0 +1,86 @@
+"gene","block","file","pct_cells"
+"MS4A1","Lineage","img/features/MS4A1.png",36.3
+"CD79A","Lineage","img/features/CD79A.png",58.5
+"CD19","Lineage","img/features/CD19.png",34
+"CD3E","Lineage","img/features/CD3E.png",48
+"CD3D","Lineage","img/features/CD3D.png",60.9
+"TRAC","Lineage","img/features/TRAC.png",31.9
+"RAG1","Pre-B","img/features/RAG1.png",0.8
+"RAG2","Pre-B","img/features/RAG2.png",0.5
+"MYB","Pre-B","img/features/MYB.png",4
+"VPREB1","Pre-B","img/features/VPREB1.png",1.6
+"SOX4","Pre-B","img/features/SOX4.png",13.5
+"VPREB3","Immature B","img/features/VPREB3.png",15
+"IGHM","Immature B","img/features/IGHM.png",42.8
+"FCER2","Naive B","img/features/FCER2.png",20.2
+"IGHD","Naive B","img/features/IGHD.png",29.4
+"CD79B","Naive B","img/features/CD79B.png",43.6
+"BACH2","Naive B","img/features/BACH2.png",38
+"TNFRSF13B","Unswitched memory B","img/features/TNFRSF13B.png",3.4
+"FCRL3","Unswitched memory B","img/features/FCRL3.png",6.8
+"BLK","Unswitched memory B","img/features/BLK.png",13.4
+"TNFRSF13C","Unswitched memory B","img/features/TNFRSF13C.png",23.4
+"SSPN","Switched memory B","img/features/SSPN.png",0.9
+"IGHG3","Switched memory B","img/features/IGHG3.png",14.6
+"IGHA2","Switched memory B","img/features/IGHA2.png",3.5
+"FCRL4","Exhausted B","img/features/FCRL4.png",2.1
+"TBX21","Exhausted B","img/features/TBX21.png",5.1
+"FCRL5","Exhausted B","img/features/FCRL5.png",18.2
+"ZEB2","Exhausted B","img/features/ZEB2.png",21.8
+"JCHAIN","Plasmablasts","img/features/JCHAIN.png",1
+"TNFRSF17","Plasmablasts","img/features/TNFRSF17.png",0.5
+"BHLHA15","Plasmablasts","img/features/BHLHA15.png",0.2
+"RRM2","Plasmablasts","img/features/RRM2.png",0.5
+"MKI67","Plasmablasts","img/features/MKI67.png",1
+"CD4","CD4 T naive","img/features/CD4.png",28.3
+"TCF7","CD4 T naive","img/features/TCF7.png",44.8
+"LEF1","CD4 T naive","img/features/LEF1.png",43
+"CCR7","CD4 T naive","img/features/CCR7.png",27.9
+"MAF","CD4 T memory","img/features/MAF.png",4.7
+"TNFRSF4","CD4 T memory","img/features/TNFRSF4.png",8.6
+"CD28","CD4 T memory","img/features/CD28.png",14.9
+"IL7R","CD4 T memory","img/features/IL7R.png",32.6
+"FOXP3","Treg","img/features/FOXP3.png",1.1
+"IL2RA","Treg","img/features/IL2RA.png",2.9
+"CTLA4","Treg","img/features/CTLA4.png",1.9
+"TIGIT","Treg","img/features/TIGIT.png",1.8
+"TNFRSF18","Treg","img/features/TNFRSF18.png",5.4
+"CD8B","CD8 T naive","img/features/CD8B.png",10.9
+"CD8A","CD8 T naive","img/features/CD8A.png",16.7
+"CCL5","CD8 T effector memory","img/features/CCL5.png",4.1
+"GZMA","CD8 T effector memory","img/features/GZMA.png",1.1
+"YBX3","CD8 T effector memory","img/features/YBX3.png",7.2
+"ZNF683","CD8 T effector memory","img/features/ZNF683.png",4.9
+"NKG7","CD8 T effector memory","img/features/NKG7.png",10.2
+"TRDC","Gamma delta T","img/features/TRDC.png",3.6
+"TRGC1","Gamma delta T","img/features/TRGC1.png",3.8
+"KLRD1","Gamma delta T","img/features/KLRD1.png",4.7
+"IKZF2","Gamma delta T","img/features/IKZF2.png",11.1
+"TRGC2","Gamma delta T","img/features/TRGC2.png",15.3
+"GNLY","NK cells","img/features/GNLY.png",2.5
+"GZMB","NK cells","img/features/GZMB.png",3.3
+"KLRF1","NK cells","img/features/KLRF1.png",1.3
+"GZMK","NK cells","img/features/GZMK.png",6.4
+"MS4A7","Monocytes","img/features/MS4A7.png",4.4
+"VCAN","Monocytes","img/features/VCAN.png",6.5
+"AIF1","Monocytes","img/features/AIF1.png",7.4
+"CD14","Monocytes","img/features/CD14.png",8.4
+"LYZ","Monocytes","img/features/LYZ.png",25
+"FLT3","DCs","img/features/FLT3.png",2.4
+"CADM1","DCs","img/features/CADM1.png",1.7
+"IRF8","DCs","img/features/IRF8.png",30.8
+"PLD4","DCs","img/features/PLD4.png",11.8
+"CAMP","Neutrophils","img/features/CAMP.png",1.5
+"LTF","Neutrophils","img/features/LTF.png",4.4
+"MMP8","Neutrophils","img/features/MMP8.png",1.8
+"LCN2","Neutrophils","img/features/LCN2.png",1.1
+"MMP9","Neutrophils","img/features/MMP9.png",2.1
+"CCR3","Eosinophils","img/features/CCR3.png",1.3
+"IL5RA","Eosinophils","img/features/IL5RA.png",1.1
+"GATA1","Eosinophils","img/features/GATA1.png",0.3
+"PTAFR","Eosinophils","img/features/PTAFR.png",4.6
+"TUBB1","Platelet-bound cells","img/features/TUBB1.png",0.3
+"CAVIN2","Platelet-bound cells","img/features/CAVIN2.png",0.2
+"CLU","Platelet-bound cells","img/features/CLU.png",0.6
+"NRGN","Platelet-bound cells","img/features/NRGN.png",3.9
+"GNG11","Platelet-bound cells","img/features/GNG11.png",2.6

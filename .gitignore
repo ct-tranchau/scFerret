@@ -1,0 +1,10 @@
+# Only docs/ is published. Everything else at the top level stays local, so that
+# an accidental `git add .` cannot pull in Data/ or Working/ (14 GB, 39 files over
+# GitHub's 100 MB limit).
+/*
+!/.gitignore
+!/docs/
+
+# macOS sidecar files, which this exFAT drive creates everywhere
+._*
+.DS_Store

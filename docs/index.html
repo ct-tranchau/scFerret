@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A single-cell transcriptomic atlas of ferret peripheral blood across prime and boost vaccination</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1b1b1b; --muted: #6a6a6a; --line: #e3e3e3;
+    --accent: #A50F15; --chip: #f4f4f4; --chipOn: #A50F15;
+  }
+  :root:not([data-theme="light"]) { }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #141414; --fg: #ececec; --muted: #9a9a9a; --line: #2e2e2e;
+      --chip: #242424; --accent: #ff6b6b; --chipOn: #ff6b6b;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #141414; --fg: #ececec; --muted: #9a9a9a; --line: #2e2e2e;
+    --chip: #242424; --accent: #ff6b6b; --chipOn: #ff6b6b;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg);
+    font: 15px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; }
+  /* hero, matching the reference site: gradient band, pill brand, title, subtitle, a row of
+     headline numbers, and the icon floating at the right over a soft radial glow. */
+  .hero { background: linear-gradient(120deg, #4a2d16 0%, #8a5a33 55%, #b07d4e 100%); color: #fff;
+    padding: 32px 22px 30px; }
+  .hero-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: flex-start; gap: 24px; }
+  .hero-text { flex: 1; min-width: 0; }
+  .brand { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: 2.5px;
+    text-transform: uppercase; background: rgba(255,255,255,.16);
+    border: 1px solid rgba(255,255,255,.28); padding: 5px 13px; border-radius: 999px; }
+  .hero h1 { font-size: 26px; line-height: 1.28; margin: 16px 0 8px; font-weight: 700; max-width: 1120px; }
+  .hero .sub { font-size: 18px; color: rgba(255,255,255,.9); margin: 0; max-width: 1000px; }
+  .stats { margin-top: 20px; display: flex; gap: 34px; flex-wrap: wrap; }
+  .stat b { display: block; font-size: 22px; font-weight: 700; color: #fff; line-height: 1.1; }
+  .stat span { font-size: 12px; text-transform: uppercase; letter-spacing: .7px;
+    color: rgba(255,255,255,.78); }
+  .logo-wrap { flex: none; position: relative; display: flex; align-items: center;
+    justify-content: center; margin-top: 46px; animation: float 5.5s ease-in-out infinite; }
+  .logo-wrap::before { content: ""; position: absolute; width: 190px; height: 190px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,.30) 0%, rgba(255,255,255,0) 68%); z-index: 0; }
+  .ferret { position: relative; z-index: 1; width: 160px; height: 160px; object-fit: contain;
+    filter: drop-shadow(0 6px 14px rgba(0,0,0,.32)); transition: transform .35s ease; }
+  svg.ferret { width: 158px; height: 158px; }
+  .ferret:hover { transform: scale(1.07) rotate(-3deg); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+  @media (max-width: 760px) {
+    .hero h1 { font-size: 22px; }
+    .hero-inner { flex-direction: column; }
+    .logo-wrap { margin-top: 6px; align-self: center; }
+  }
+  @media (prefers-reduced-motion: reduce) { .logo-wrap { animation: none; } }
+  select#pick { width: 100%; padding: 9px 11px; font-size: 14px; color: var(--fg);
+    border: 1px solid var(--line); border-radius: 8px; background: var(--bg); }
+  select#pick:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  main { display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 22px;
+    padding: 18px 16px 40px; max-width: 1560px; margin: 0 auto; align-items: start; }
+  @media (max-width: 900px) { main { grid-template-columns: 1fr; } }
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: var(--bg); }
+  .card h2 { margin: 0 0 8px; font-size: 13px; text-transform: uppercase;
+    letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+  .card img { width: 100%; height: auto; display: block; border-radius: 6px; }
+  .sticky { position: sticky; top: 14px; }
+  .meta { color: var(--muted); font-size: 12.5px; margin: 6px 0 0; }
+  footer { border-top: 1px solid var(--line); margin-top: 10px; }
+  .fwrap { max-width: 1560px; margin: 0 auto; padding: 18px 16px 34px;
+    color: var(--muted); font-size: 13px; }
+  .fwrap b { color: var(--fg); font-weight: 600; }
+  .fwrap a { color: var(--accent); text-decoration: none; }
+  .fwrap a:hover { text-decoration: underline; }
+  .fwrap .sep { margin: 0 8px; opacity: .5; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <span class="brand">scFerret</span>
+      <h1>A single-cell transcriptomic atlas of ferret peripheral blood across prime and boost vaccination</h1>
+      <p class="sub">Interactive expression browser for 5’ single-cell RNA-seq of ferret peripheral blood with paired BCR and TCR, after prime and boost vaccination.</p>
+      <div class="stats">
+        <div class="stat"><b>28,424</b><span>Cells</span></div>
+        <div class="stat"><b>19</b><span>Cell states</span></div>
+        <div class="stat"><b>8</b><span>Samples</span></div>
+        <div class="stat"><b>2</b><span>Timepoints</span></div>
+      </div>
+    </div>
+    <div class="logo-wrap">
+      <svg class="ferret" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+        <!-- a cute, front-facing ferret: chibi proportions, head about half the figure -->
+        <path d="M70 80c12 2 22-5 24-16 1-6-3-11-8-10-6 1-7 8-6 13-1 5-6 8-11 8z" fill="#d8b183"/>
+        <ellipse cx="50" cy="74" rx="23" ry="20" fill="#b07d4e"/>
+        <ellipse cx="50" cy="79" rx="14" ry="13" fill="#f2e6d2"/>
+        <ellipse cx="40" cy="91" rx="6.5" ry="4.5" fill="#c9a06c"/>
+        <ellipse cx="60" cy="91" rx="6.5" ry="4.5" fill="#c9a06c"/>
+        <circle cx="27" cy="25" r="10" fill="#b07d4e"/>
+        <circle cx="73" cy="25" r="10" fill="#b07d4e"/>
+        <circle cx="27" cy="25" r="5.5" fill="#e8a9a0"/>
+        <circle cx="73" cy="25" r="5.5" fill="#e8a9a0"/>
+        <circle cx="50" cy="41" r="28" fill="#c9a06c"/>
+        <ellipse cx="50" cy="47" rx="21" ry="17" fill="#f7eedd"/>
+        <circle cx="39" cy="41" r="6.2" fill="#2b2118"/>
+        <circle cx="61" cy="41" r="6.2" fill="#2b2118"/>
+        <circle cx="41" cy="38.5" r="2.2" fill="#fff"/>
+        <circle cx="63" cy="38.5" r="2.2" fill="#fff"/>
+        <circle cx="31" cy="51" r="4.4" fill="#eeb6ac" opacity=".75"/>
+        <circle cx="69" cy="51" r="4.4" fill="#eeb6ac" opacity=".75"/>
+        <path d="M50 51c-3 0-5 1.6-5 3.3 0 2 2.4 3.2 5 3.2s5-1.2 5-3.2c0-1.7-2-3.3-5-3.3z" fill="#2b2118"/>
+        <path d="M44 60c2 2.4 4 3.4 6 3.4s4-1 6-3.4" fill="none" stroke="#2b2118"
+              stroke-width="2.1" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section>
+    <div class="card" style="margin-bottom:14px">
+      <h2>Marker gene</h2>
+      <select id="pick" aria-label="Choose a gene"></select>
+    </div>
+    <div class="card">
+      <h2>Expression</h2>
+      <img id="feat" src="img/features/MS4A1.png" alt="Feature plot">
+      <p class="meta" id="meta"></p>
+    </div>
+  </section>
+
+  <section class="card sticky">
+    <h2>Cell states</h2>
+    <img src="img/umap_global.png" alt="UMAP of all cells coloured by cell state, with dashed outlines around each major lineage">
+  </section>
+</main>
+
+<footer>
+  <div class="fwrap">
+    <b>Tran Chau</b><span class="sep">|</span><a href="mailto:tnchau@vt.edu">tnchau@vt.edu</a><span class="sep">|</span><a href="https://github.com/ct-tranchau" rel="noopener">github.com/ct-tranchau</a>
+  </div>
+</footer>
+
+<script>
+const GENES = [{"gene": "MS4A1", "block": "Lineage", "file": "img/features/MS4A1.png", "pct_cells": 36.3}, {"gene": "CD79A", "block": "Lineage", "file": "img/features/CD79A.png", "pct_cells": 58.5}, {"gene": "CD19", "block": "Lineage", "file": "img/features/CD19.png", "pct_cells": 34}, {"gene": "CD3E", "block": "Lineage", "file": "img/features/CD3E.png", "pct_cells": 48}, {"gene": "CD3D", "block": "Lineage", "file": "img/features/CD3D.png", "pct_cells": 60.9}, {"gene": "TRAC", "block": "Lineage", "file": "img/features/TRAC.png", "pct_cells": 31.9}, {"gene": "RAG1", "block": "Pre-B", "file": "img/features/RAG1.png", "pct_cells": 0.8}, {"gene": "RAG2", "block": "Pre-B", "file": "img/features/RAG2.png", "pct_cells": 0.5}, {"gene": "MYB", "block": "Pre-B", "file": "img/features/MYB.png", "pct_cells": 4}, {"gene": "VPREB1", "block": "Pre-B", "file": "img/features/VPREB1.png", "pct_cells": 1.6}, {"gene": "SOX4", "block": "Pre-B", "file": "img/features/SOX4.png", "pct_cells": 13.5}, {"gene": "VPREB3", "block": "Immature B", "file": "img/features/VPREB3.png", "pct_cells": 15}, {"gene": "IGHM", "block": "Immature B", "file": "img/features/IGHM.png", "pct_cells": 42.8}, {"gene": "FCER2", "block": "Naive B", "file": "img/features/FCER2.png", "pct_cells": 20.2}, {"gene": "IGHD", "block": "Naive B", "file": "img/features/IGHD.png", "pct_cells": 29.4}, {"gene": "CD79B", "block": "Naive B", "file": "img/features/CD79B.png", "pct_cells": 43.6}, {"gene": "BACH2", "block": "Naive B", "file": "img/features/BACH2.png", "pct_cells": 38}, {"gene": "TNFRSF13B", "block": "Unswitched memory B", "file": "img/features/TNFRSF13B.png", "pct_cells": 3.4}, {"gene": "FCRL3", "block": "Unswitched memory B", "file": "img/features/FCRL3.png", "pct_cells": 6.8}, {"gene": "BLK", "block": "Unswitched memory B", "file": "img/features/BLK.png", "pct_cells": 13.4}, {"gene": "TNFRSF13C", "block": "Unswitched memory B", "file": "img/features/TNFRSF13C.png", "pct_cells": 23.4}, {"gene": "SSPN", "block": "Switched memory B", "file": "img/features/SSPN.png", "pct_cells": 0.9}, {"gene": "IGHG3", "block": "Switched memory B", "file": "img/features/IGHG3.png", "pct_cells": 14.6}, {"gene": "IGHA2", "block": "Switched memory B", "file": "img/features/IGHA2.png", "pct_cells": 3.5}, {"gene": "FCRL4", "block": "Exhausted B", "file": "img/features/FCRL4.png", "pct_cells": 2.1}, {"gene": "TBX21", "block": "Exhausted B", "file": "img/features/TBX21.png", "pct_cells": 5.1}, {"gene": "FCRL5", "block": "Exhausted B", "file": "img/features/FCRL5.png", "pct_cells": 18.2}, {"gene": "ZEB2", "block": "Exhausted B", "file": "img/features/ZEB2.png", "pct_cells": 21.8}, {"gene": "JCHAIN", "block": "Plasmablasts", "file": "img/features/JCHAIN.png", "pct_cells": 1}, {"gene": "TNFRSF17", "block": "Plasmablasts", "file": "img/features/TNFRSF17.png", "pct_cells": 0.5}, {"gene": "BHLHA15", "block": "Plasmablasts", "file": "img/features/BHLHA15.png", "pct_cells": 0.2}, {"gene": "RRM2", "block": "Plasmablasts", "file": "img/features/RRM2.png", "pct_cells": 0.5}, {"gene": "MKI67", "block": "Plasmablasts", "file": "img/features/MKI67.png", "pct_cells": 1}, {"gene": "CD4", "block": "CD4 T naive", "file": "img/features/CD4.png", "pct_cells": 28.3}, {"gene": "TCF7", "block": "CD4 T naive", "file": "img/features/TCF7.png", "pct_cells": 44.8}, {"gene": "LEF1", "block": "CD4 T naive", "file": "img/features/LEF1.png", "pct_cells": 43}, {"gene": "CCR7", "block": "CD4 T naive", "file": "img/features/CCR7.png", "pct_cells": 27.9}, {"gene": "MAF", "block": "CD4 T memory", "file": "img/features/MAF.png", "pct_cells": 4.7}, {"gene": "TNFRSF4", "block": "CD4 T memory", "file": "img/features/TNFRSF4.png", "pct_cells": 8.6}, {"gene": "CD28", "block": "CD4 T memory", "file": "img/features/CD28.png", "pct_cells": 14.9}, {"gene": "IL7R", "block": "CD4 T memory", "file": "img/features/IL7R.png", "pct_cells": 32.6}, {"gene": "FOXP3", "block": "Treg", "file": "img/features/FOXP3.png", "pct_cells": 1.1}, {"gene": "IL2RA", "block": "Treg", "file": "img/features/IL2RA.png", "pct_cells": 2.9}, {"gene": "CTLA4", "block": "Treg", "file": "img/features/CTLA4.png", "pct_cells": 1.9}, {"gene": "TIGIT", "block": "Treg", "file": "img/features/TIGIT.png", "pct_cells": 1.8}, {"gene": "TNFRSF18", "block": "Treg", "file": "img/features/TNFRSF18.png", "pct_cells": 5.4}, {"gene": "CD8B", "block": "CD8 T naive", "file": "img/features/CD8B.png", "pct_cells": 10.9}, {"gene": "CD8A", "block": "CD8 T naive", "file": "img/features/CD8A.png", "pct_cells": 16.7}, {"gene": "CCL5", "block": "CD8 T effector memory", "file": "img/features/CCL5.png", "pct_cells": 4.1}, {"gene": "GZMA", "block": "CD8 T effector memory", "file": "img/features/GZMA.png", "pct_cells": 1.1}, {"gene": "YBX3", "block": "CD8 T effector memory", "file": "img/features/YBX3.png", "pct_cells": 7.2}, {"gene": "ZNF683", "block": "CD8 T effector memory", "file": "img/features/ZNF683.png", "pct_cells": 4.9}, {"gene": "NKG7", "block": "CD8 T effector memory", "file": "img/features/NKG7.png", "pct_cells": 10.2}, {"gene": "TRDC", "block": "Gamma delta T", "file": "img/features/TRDC.png", "pct_cells": 3.6}, {"gene": "TRGC1", "block": "Gamma delta T", "file": "img/features/TRGC1.png", "pct_cells": 3.8}, {"gene": "KLRD1", "block": "Gamma delta T", "file": "img/features/KLRD1.png", "pct_cells": 4.7}, {"gene": "IKZF2", "block": "Gamma delta T", "file": "img/features/IKZF2.png", "pct_cells": 11.1}, {"gene": "TRGC2", "block": "Gamma delta T", "file": "img/features/TRGC2.png", "pct_cells": 15.3}, {"gene": "GNLY", "block": "NK cells", "file": "img/features/GNLY.png", "pct_cells": 2.5}, {"gene": "GZMB", "block": "NK cells", "file": "img/features/GZMB.png", "pct_cells": 3.3}, {"gene": "KLRF1", "block": "NK cells", "file": "img/features/KLRF1.png", "pct_cells": 1.3}, {"gene": "GZMK", "block": "NK cells", "file": "img/features/GZMK.png", "pct_cells": 6.4}, {"gene": "MS4A7", "block": "Monocytes", "file": "img/features/MS4A7.png", "pct_cells": 4.4}, {"gene": "VCAN", "block": "Monocytes", "file": "img/features/VCAN.png", "pct_cells": 6.5}, {"gene": "AIF1", "block": "Monocytes", "file": "img/features/AIF1.png", "pct_cells": 7.4}, {"gene": "CD14", "block": "Monocytes", "file": "img/features/CD14.png", "pct_cells": 8.4}, {"gene": "LYZ", "block": "Monocytes", "file": "img/features/LYZ.png", "pct_cells": 25}, {"gene": "FLT3", "block": "DCs", "file": "img/features/FLT3.png", "pct_cells": 2.4}, {"gene": "CADM1", "block": "DCs", "file": "img/features/CADM1.png", "pct_cells": 1.7}, {"gene": "IRF8", "block": "DCs", "file": "img/features/IRF8.png", "pct_cells": 30.8}, {"gene": "PLD4", "block": "DCs", "file": "img/features/PLD4.png", "pct_cells": 11.8}, {"gene": "CAMP", "block": "Neutrophils", "file": "img/features/CAMP.png", "pct_cells": 1.5}, {"gene": "LTF", "block": "Neutrophils", "file": "img/features/LTF.png", "pct_cells": 4.4}, {"gene": "MMP8", "block": "Neutrophils", "file": "img/features/MMP8.png", "pct_cells": 1.8}, {"gene": "LCN2", "block": "Neutrophils", "file": "img/features/LCN2.png", "pct_cells": 1.1}, {"gene": "MMP9", "block": "Neutrophils", "file": "img/features/MMP9.png", "pct_cells": 2.1}, {"gene": "CCR3", "block": "Eosinophils", "file": "img/features/CCR3.png", "pct_cells": 1.3}, {"gene": "IL5RA", "block": "Eosinophils", "file": "img/features/IL5RA.png", "pct_cells": 1.1}, {"gene": "GATA1", "block": "Eosinophils", "file": "img/features/GATA1.png", "pct_cells": 0.3}, {"gene": "PTAFR", "block": "Eosinophils", "file": "img/features/PTAFR.png", "pct_cells": 4.6}, {"gene": "TUBB1", "block": "Platelet-bound cells", "file": "img/features/TUBB1.png", "pct_cells": 0.3}, {"gene": "CAVIN2", "block": "Platelet-bound cells", "file": "img/features/CAVIN2.png", "pct_cells": 0.2}, {"gene": "CLU", "block": "Platelet-bound cells", "file": "img/features/CLU.png", "pct_cells": 0.6}, {"gene": "NRGN", "block": "Platelet-bound cells", "file": "img/features/NRGN.png", "pct_cells": 3.9}, {"gene": "GNG11", "block": "Platelet-bound cells", "file": "img/features/GNG11.png", "pct_cells": 2.6}];
+const BLOCKS = ["Lineage", "Pre-B", "Immature B", "Naive B", "Unswitched memory B", "Switched memory B", "Exhausted B", "Plasmablasts", "CD4 T naive", "CD4 T memory", "Treg", "CD8 T naive", "CD8 T effector memory", "Gamma delta T", "NK cells", "Monocytes", "DCs", "Neutrophils", "Eosinophils", "Platelet-bound cells"];
+const pick = document.getElementById('pick');
+const feat = document.getElementById('feat');
+const meta = document.getElementById('meta');
+let current = GENES[0];
+
+function show(g) {
+  current = g;
+  feat.src = g.file;
+  feat.alt = 'Feature plot for ' + g.gene;
+  meta.textContent = g.gene + ' \u2014 ' + g.block + ' marker \u2014 detected in ' + g.pct_cells + '% of cells';
+  if (pick.value !== g.gene) pick.value = g.gene;
+}
+
+// the dropdown lists every gene grouped by its block, the same order as the chips below
+BLOCKS.forEach(b => {
+  const og = document.createElement('optgroup'); og.label = b;
+  GENES.filter(g => g.block === b).forEach(g => {
+    const o = document.createElement('option'); o.value = g.gene; o.textContent = g.gene; og.appendChild(o);
+  });
+  pick.appendChild(og);
+});
+pick.addEventListener('change', () => {
+  const g = GENES.find(x => x.gene === pick.value); if (g) show(g);
+});
+
+show(GENES[0]);
+</script>
+</body>
+</html>
