@@ -31,9 +31,6 @@ Gene browser: [index.html](index.html)
 
 - Files: [Analysis](Analysis)
 - All the functions are stored in _setup.R
-- Run order in a fresh copy: step 0, then step 1 (step_10 then step_15), then steps 2 to 5 in any order. Steps 1 to 5 read Working/objects_v2_ncbi/global.rds, which only step 0 creates. It is not in the repo, so knitting a later step first fails with "cannot open the connection"
-- Keep the folder named Analysis. _setup.R finds the project root as the parent of a folder called Analysis, and all paths (Data, Tables, Working, Figures) hang off that root
-- Step 0 and step 1 read the Cell Ranger outputs under Data/cellranger/<sample>/ (sample_filtered_feature_bc_matrix, vdj_b and vdj_t tables). Steps 2 to 5 do not. Data/cellranger is not in the repo, ask for it and drop the 8 sample folders into Data/cellranger/
 - Step 0: step_00_preprocessing.Rmd, step_00_preprocessing.html
 - Step 1: step_10_annotation.Rmd, find the annotation manually first, step_10_annotation.html, step_15_subclustering.html
 - Step 2: step_20_cellproportion.Rmd, step_20_cellproportion.html
