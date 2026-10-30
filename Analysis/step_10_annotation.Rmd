@@ -1,0 +1,211 @@
+---
+title: "Step 10. Annotation, global labels and detailed labels"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds` from step 00, the Cell Ranger contigs for that run.
+Output: the same `Working/objects_<run>/global.rds`, now carrying the receptor columns, the global `cell_type` and the detailed `B_subtype_detail` and `T_subtype`.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## Load the clustered object
+
+```{r load}
+obj <- readRDS(gfile)
+Idents(obj) <- obj$seurat_clusters
+c(cells = ncol(obj), clusters = nlevels(obj$seurat_clusters))
+```
+
+## Attach the BCR and TCR
+
+```{r vdj}
+bcr <- read_contigs("vdj_b")
+tcr <- read_contigs("vdj_t")
+b <- full_join(best_chain(bcr, "IGH", "igh_"), best_chain(bcr, c("IGK", "IGL"), "igl_"), by = c("cell", "animal"))
+b <- b |> mutate(isotype = case_when(grepl("^IGHM", igh_c_gene, TRUE) ~ "IgM", grepl("^IGHD", igh_c_gene, TRUE) ~ "IgD", grepl("^IGHG", igh_c_gene, TRUE) ~ "IgG", grepl("^IGHA", igh_c_gene, TRUE) ~ "IgA", grepl("^IGHE", igh_c_gene, TRUE) ~ "IgE"))
+b$bcr_clone <- clone_key(b$animal, b$igh_v_gene, b$igh_j_gene, b$igh_cdr3)
+airr <- bind_rows(lapply(vdj_path(ss$sample, "vdj_b", "airr_rearrangement.tsv"), read.delim, colClasses = "character"))
+airr <- airr[match(b$igh_contig_id, airr$sequence_id), ]
+vreg <- substr(airr$sequence_alignment, as.integer(airr$v_sequence_start), as.integer(airr$v_sequence_end))
+ok <- !is.na(vreg) & nchar(vreg) >= 50
+b$igh_shm <- NA
+b$igh_shm[ok] <- 1 - pwalign::pid(pwalign::pairwiseAlignment(Biostrings::DNAStringSet(vreg[ok]), Biostrings::DNAStringSet(airr$germline_alignment[ok]), type = "local"), "PID1") / 100
+t <- full_join(best_chain(tcr, "TRB", "trb_"), best_chain(tcr, "TRA", "tra_"), by = c("cell", "animal"))
+t$tcr_clone <- ifelse(is.na(t$trb_cdr3), NA, paste(t$animal, t$trb_v_gene, t$trb_j_gene, t$trb_cdr3, sep = "|"))
+i <- match(colnames(obj), b$cell)
+obj$isotype <- b$isotype[i]
+obj$igh_shm <- b$igh_shm[i]
+obj$bcr_clone <- b$bcr_clone[i]
+obj$tcr_clone <- t$tcr_clone[match(colnames(obj), t$cell)]
+obj$has_bcr <- !is.na(obj$bcr_clone)
+obj$has_tcr <- !is.na(obj$tcr_clone)
+obj$bcr_clone_size <- ave(obj$has_bcr, paste(obj$sample, obj$bcr_clone), FUN = length)
+obj$bcr_clone_size[!obj$has_bcr] <- NA
+obj$tcr_clone_size <- ave(obj$has_tcr, paste(obj$sample, obj$tcr_clone), FUN = length)
+obj$tcr_clone_size[!obj$has_tcr] <- NA
+c(cells = ncol(obj), with_BCR = sum(obj$has_bcr), with_TCR = sum(obj$has_tcr))
+```
+
+## Global label, cluster numbers replaced by cell type names
+
+```{r annotate_global}
+gev <- global_rules(obj)
+write.csv(gev, file.path(tab, "step10_global_cluster_evidence.csv"), row.names = FALSE)
+ct <- setNames(gev$cell_type, gev$cluster)
+obj$cell_type <- factor(unname(ct[as.character(obj$seurat_clusters)]), names(ct_cols))
+x <- GetAssayData(obj, layer = "counts")
+t_genes <- Matrix::colSums(x[gfind(obj, c("CD3E", "CD3D", "CD3G", "CD2")), ] > 0)
+pb_cl <- gev$cluster[gev$pc >= .3 & gev$cell_type == "B cells"]
+t_min <- ifelse(as.character(obj$seurat_clusters) %in% pb_cl, 3, 2)
+obj$cell_type[obj$cell_type == "B cells" & t_genes >= t_min] <- "Doublets"
+obj <- subset(obj, cells = colnames(obj)[obj$cell_type != "Doublets"])
+obj$cell_type <- droplevels(obj$cell_type)
+
+if (run == "v1_ensembl") {
+  lymph <- obj$cell_type %in% c("B cells", "CD4 T cells", "CD8 T cells", "NK cells", "Gamma delta T cells") & obj$seurat_clusters != "21"
+  obj <- subset(obj, cells = colnames(obj)[!(lymph & obj$percent.ribo < 5)])
+}
+print(gev)
+Idents(obj) <- obj$cell_type
+p_umap <- DimPlot(obj, group.by = "cell_type", cols = ct_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step10_01_umap_cell_types.pdf"), p_umap, width = 9, height = 7)
+p_umap
+table(obj$cell_type)
+```
+
+## Detail label, B and T states from subclustering
+
+```{r annotate_detail}
+b <- recluster(subset(obj, cell_type == "B cells"), res = 1)
+a1 <- b_rules(b)
+b <- recluster(subset(b, cells = colnames(b)[a1$detail[match(b$seurat_clusters, a1$cluster)] != "Doublets"]), res = 1.5)
+ann_b <- b_rules(b)
+write.csv(ann_b, file.path(tab, "step10_B_cluster_evidence.csv"), row.names = FALSE)
+b$B_state <- factor(unname(ann_b$detail[match(b$seurat_clusters, ann_b$cluster)]), names(bd_cols))
+b <- subset(b, cells = colnames(b)[b$B_state != "Doublets"])
+
+tc <- recluster(subset(obj, cell_type %in% c("CD4 T cells", "CD8 T cells", "NK cells", "Gamma delta T cells")), res = 1)
+a1 <- t_rules(tc)
+tc <- recluster(subset(tc, cells = colnames(tc)[a1$T_subtype[match(tc$seurat_clusters, a1$cluster)] != "Doublets"]), res = 1.5)
+ann_t <- t_rules(tc)
+write.csv(ann_t, file.path(tab, "step10_T_cluster_evidence.csv"), row.names = FALSE)
+tc$T_state <- factor(unname(ann_t$T_subtype[match(tc$seurat_clusters, ann_t$cluster)]), names(t_cols))
+tc <- subset(tc, cells = colnames(tc)[tc$T_state != "Doublets"])
+
+eb <- Embeddings(b, "umap")[, 1:2]
+et <- Embeddings(tc, "umap")[, 1:2]
+obj$B_subtype_detail <- factor(as.character(b$B_state)[match(colnames(obj), colnames(b))], levels(droplevels(b$B_state)))
+obj$T_subtype <- factor(as.character(tc$T_state)[match(colnames(obj), colnames(tc))], levels(droplevels(tc$T_state)))
+obj$b_umap_1 <- unname(eb[match(colnames(obj), rownames(eb)), 1])
+obj$b_umap_2 <- unname(eb[match(colnames(obj), rownames(eb)), 2])
+obj$t_umap_1 <- unname(et[match(colnames(obj), rownames(et)), 1])
+obj$t_umap_2 <- unname(et[match(colnames(obj), rownames(et)), 2])
+obj$cell_state <- droplevels(factor(coalesce(as.character(obj$B_subtype_detail), as.character(obj$T_subtype), as.character(obj$cell_type)), names(state_cols)))
+qc_cols <- intersect(c("sample", "label", "animal", "group", "timepoint", "cell_type", "cell_state", "nFeature_RNA", "nCount_RNA", "percent.mt", "percent.ribo", "doublet_score", "b_umap_1", "b_umap_2", "t_umap_1", "t_umap_2"), names(obj@meta.data))
+gum <- Embeddings(obj, "umap")[, 1:2]; colnames(gum) <- c("umap_1", "umap_2")
+
+write.csv(data.frame(cell = colnames(obj), gum[colnames(obj), ], obj@meta.data[, qc_cols]), file.path(tab, "step10_cell_metadata_pre_exclusion.csv"), row.names = FALSE)
+damaged <- grepl("^Damaged", as.character(obj$cell_state))
+cat(sprintf("damaged cells removed: %d of %d (%.1f%%)\n", sum(damaged), ncol(obj), 100 * mean(damaged)))
+print(table(obj$cell_state[damaged], obj$sample[damaged]))
+obj <- subset(obj, cells = colnames(obj)[!damaged])
+obj$cell_state <- droplevels(obj$cell_state)
+obj$B_subtype_detail <- droplevels(obj$B_subtype_detail)
+obj$T_subtype <- droplevels(obj$T_subtype)
+saveRDS(obj, gfile)
+p_state <- DimPlot(obj, group.by = "cell_state", cols = state_cols, label = TRUE, repel = TRUE, label.size = 3.4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step10_02_umap_cell_states_detail.pdf"), p_state, width = 11, height = 8)
+p_state
+table(obj$cell_state)
+```
+
+## Dot plot of the marker genes
+
+```{r dotplot}
+clean_dot <- list(
+  "Lineage"               = c("MS4A1", "CD79A", "CD19", "CD3E", "CD3D", "TRAC"),
+  "Pre-B"                 = c("RAG1", "RAG2", "MYB", "VPREB1", "SOX4"),
+  "Immature B"            = c("VPREB3", "MS4A1", "SOX4", "IGHM"),
+  "Naive B"               = c("FCER2", "IGHD", "CD79B", "BACH2", "CD79A"),
+  "Unswitched memory B"   = c("TNFRSF13B", "FCRL3", "BLK", "TNFRSF13C"),
+  "Switched memory B"     = c("TNFRSF13B", "SSPN", "IGHG3", "IGHA2"),
+  "Exhausted B"           = c("FCRL4", "TBX21", "FCRL5", "ZEB2"),
+  "Plasmablasts"          = c("JCHAIN", "TNFRSF17", "BHLHA15", "RRM2", "MKI67"),
+  "CD4 T naive"           = c("CD4", "TCF7", "LEF1", "CCR7"),
+  "CD4 T memory"          = c("MAF", "TNFRSF4", "CD28", "IL7R"),
+  "Treg"                  = c("FOXP3", "IL2RA", "CTLA4", "TIGIT", "TNFRSF18"),
+  "CD8 T naive"           = c("CD8B", "CD8A"),
+  "CD8 T effector memory" = c("CCL5", "GZMA", "YBX3", "ZNF683", "NKG7"),
+  "Gamma delta T"         = c("TRDC", "TRGC1", "KLRD1", "IKZF2", "TRGC2"),
+  "NK cells"              = c("GNLY", "GZMB", "KLRF1", "GZMK"),
+  "Monocytes"             = c("MS4A7", "VCAN", "AIF1", "CD14", "LYZ"),
+  "DCs"                   = c("FLT3", "CADM1", "IRF8", "PLD4"),
+  "Neutrophils"           = c("CAMP", "LTF", "MMP8", "LCN2", "MMP9"),
+  "Eosinophils"           = c("CCR3", "IL5RA", "GATA1", "PTAFR"),
+  "Platelet-bound cells"  = c("TUBB1", "CAVIN2", "CLU", "NRGN", "GNG11"))
+blocks <- lapply(clean_dot, function(g) gfind(obj, g))
+seen <- character()
+for (n in names(blocks)) { blocks[[n]] <- setdiff(blocks[[n]], seen); seen <- c(seen, blocks[[n]]) }
+blocks <- blocks[lengths(blocks) > 0]
+feat <- unname(unlist(blocks))
+p_dot <- DotPlot(obj, features = feat, group.by = "cell_state", cols = c("grey90", "#B2182B")) +
+  geom_vline(xintercept = cumsum(lengths(blocks))[-length(blocks)] + .5, linetype = "dashed", colour = "grey40", linewidth = .4) +
+  annotate("text", x = cumsum(lengths(blocks)) - lengths(blocks) / 2 + .5, y = nlevels(obj$cell_state) + .8, label = names(blocks), angle = 90, hjust = 0, size = 3.4) +
+  coord_cartesian(clip = "off") + scale_y_discrete(limits = rev) + labs(x = NULL, y = NULL) +
+  theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = .5, size = 10), legend.position = "bottom", legend.box = "horizontal", plot.margin = margin(120, 8, 5, 5))
+ggsave(file.path(fig, "step10_03_dotplot_clean_marker_panel.pdf"), p_dot, width = 3 + .3 * length(feat), height = 9.5)
+p_dot
+```
+
+## Feature plots
+
+```{r featureplot}
+genes <- c(
+  "MS4A1",
+  "CD79A",
+  "CD3E",
+  "CD8A",
+  "TRDC",
+  "NCR1",
+  "CD14",
+  "S100A8",
+  "IL5RA",
+  "CLEC10A",
+  "JCHAIN",
+  "GNG11")
+p_feat <- FeaturePlot(obj, gfind(obj, genes), order = TRUE, ncol = 4, raster = TRUE) & NoAxes()
+ggsave(file.path(fig, "step10_04_featureplots_markers.pdf"), p_feat, width = 16, height = 12)
+p_feat
+```
+
+## UMAP of the B cells only
+
+```{r umap_b}
+b <- sub_umap(obj, colnames(obj)[!is.na(obj$B_subtype_detail)], "b_umap_1", "b_umap_2")
+p_b <- DimPlot(b, group.by = "B_subtype_detail", cols = bd_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step10_05_umap_B_states.pdf"), p_b, width = 9, height = 7)
+p_b
+```
+
+## UMAP of the T and NK cells only
+
+```{r umap_t}
+tc <- sub_umap(obj, colnames(obj)[!is.na(obj$T_subtype)], "t_umap_1", "t_umap_2")
+p_t <- DimPlot(tc, group.by = "T_subtype", cols = t_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step10_06_umap_T_states.pdf"), p_t, width = 9, height = 7)
+p_t
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

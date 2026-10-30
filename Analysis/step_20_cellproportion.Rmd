@@ -1,0 +1,64 @@
+---
+title: "Step 20. Cell proportions per sample"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds`, which carries the cell types from step 10 and the B states from step 15.
+Output: figures in `Figures/<run>/`, tables in `Tables/<run>/`. This step only plots, it does not change the object.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## Global cell types
+
+```{r global_bars}
+obj <- readRDS(gfile)
+cnt <- count_frac(obj@meta.data, "cell_type")
+write.csv(cnt, file.path(tab, "step20_celltype_counts_per_sample.csv"), row.names = FALSE)
+p_ct <- lab_bars(cnt, "cell_type", ct_cols) & big
+ggsave(file.path(fig, "step20_01_celltype_counts_fractions_per_sample.pdf"), p_ct, width = 13, height = 6)
+p_ct
+cnt |> group_by(cell_type) |> summarise(cells = sum(n), pct = round(100 * sum(n) / sum(cnt$n), 1))
+```
+
+## Major lineages
+
+```{r major_bars}
+major <- c("B cells" = "B cells", "CD4 T cells" = "T cells", "CD8 T cells" = "T cells", "Gamma delta T cells" = "T cells", "NK cells" = "NK cells",
+           "Monocytes" = "Myeloid", "DCs" = "Myeloid", "Neutrophils" = "Myeloid", "Eosinophils" = "Myeloid", "Platelet-bound cells" = "Platelet-bound")
+maj_cols <- c("B cells" = "#1F77B4", "T cells" = "#2CA02C", "NK cells" = "#D62728", "Myeloid" = "#FF7F0E", "Platelet-bound" = "#F7B6D2")
+cm <- obj@meta.data |> filter(cell_type %in% names(major)) |> mutate(major = factor(major[as.character(cell_type)], names(maj_cols))) |> count_frac("major")
+write.csv(cm, file.path(tab, "step20_major_lineage_counts_per_sample.csv"), row.names = FALSE)
+p_maj <- lab_bars(cm, "major", maj_cols) & big
+ggsave(file.path(fig, "step20_02_major_lineage_counts_fractions_per_sample.pdf"), p_maj, width = 12, height = 5.5)
+p_maj
+cm |> group_by(major) |> summarise(cells = sum(n), pct = round(100 * sum(n) / sum(cm$n), 1))
+```
+
+## B cell states
+
+```{r b_bars}
+b <- sub_umap(obj, colnames(obj)[!is.na(obj$B_subtype_detail)], "b_umap_1", "b_umap_2")
+bcd <- count_frac(b@meta.data, "B_subtype_detail")
+write.csv(bcd, file.path(tab, "step20_B_state_counts_per_sample.csv"), row.names = FALSE)
+p_b <- lab_bars(bcd, "B_subtype_detail", bd_cols, min_frac = .04) & big
+ggsave(file.path(fig, "step20_03_B_state_counts_fractions_per_sample.pdf"), p_b, width = 13, height = 6)
+p_b
+p_bumap <- DimPlot(b, group.by = "B_subtype_detail", cols = bd_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step20_04_umap_B_states.pdf"), p_bumap, width = 9, height = 7)
+p_bumap
+bcd |> group_by(B_subtype_detail) |> summarise(cells = sum(n), pct_of_B = round(100 * sum(n) / sum(bcd$n), 1))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

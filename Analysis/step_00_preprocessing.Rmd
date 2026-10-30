@@ -1,0 +1,120 @@
+---
+title: "Step 00. Preprocessing, integration and clustering"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: the 8 Cell Ranger matrices for the run named by `GR0389_RUN`, `Data/sample_sheet.csv`.
+Output: `Working/objects_<run>/global.rds`, figures in `Figures/<run>/`, tables in `Tables/<run>/`.
+No cell type labels here, clusters only.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## Load the 8 matrices
+
+```{r load}
+suppressPackageStartupMessages({ library(scds); library(SingleCellExperiment) })
+one_sample <- function(i) {
+  m <- rename_loc_matrix(Read10X(mtx_path(ss$sample[i])), gene_map)
+  o <- CreateSeuratObject(m, project = ss$sample[i], min.cells = 3, min.features = 200)
+  o <- RenameCells(o, add.cell.id = ss$sample[i])
+  for (v in names(ss)) o[[v]] <- ss[[v]][i]
+  o$percent.mt <- PercentageFeatureSet(o, features = gfind(o, mt_genes))
+  o$percent.ribo <- PercentageFeatureSet(o, pattern = "^RP[SL]\\d+[A-Z]?$")
+  o$percent.hb <- PercentageFeatureSet(o, features = gfind(o, c("HBZ", "HBQ1", "HBB", "HBA1", "HBA2", "HBE1")))
+  o$doublet_score <- cxds_bcds_hybrid(SingleCellExperiment(list(counts = GetAssayData(o, layer = "counts"))))$hybrid_score
+  o$doublet <- ifelse(rank(-o$doublet_score) <= round(.008 * ncol(o)^2 / 1000), "doublet", "singlet")
+  o
+}
+objs <- lapply(seq_len(nrow(ss)), one_sample)
+obj <- JoinLayers(merge(objs[[1]], objs[-1]))
+rm(objs)
+obj$sample <- factor(obj$sample, levels = ss$sample)
+obj$label <- labs_of(obj$sample)
+obj$timepoint <- factor(obj$timepoint, levels = tp_levels)
+c(cells = ncol(obj), genes = nrow(obj))
+```
+
+## Quality control
+
+```{r qc}
+mt_max <- if (run == "v2_ncbi") 10 else 100
+feat_max <- if (run == "v2_ncbi") 7000 else 5000
+umi_max  <- if (run == "v2_ncbi") 45000 else 30000
+qc_feats <- c("nFeature_RNA", "nCount_RNA", "percent.mt", "percent.ribo", "doublet_score")
+p_before <- VlnPlot(obj, qc_feats, group.by = "label", pt.size = 0, ncol = 5) & rot & labs(x = NULL)
+ggsave(file.path(fig, "step00_01_qc_violin_before_filter.pdf"), p_before, width = 18, height = 5)
+p_before
+md <- obj@meta.data
+
+if (run == "v2_ncbi") print(md |> group_by(sample) |> summarise(median_mt = round(median(percent.mt), 2), p95 = round(quantile(percent.mt, .95), 2), over_cut = sum(percent.mt > mt_max), pct_over = round(100 * mean(percent.mt > mt_max), 1)) |> as.data.frame())
+keep <- md$nFeature_RNA >= 500 & md$nFeature_RNA <= feat_max & md$nCount_RNA <= umi_max & md$percent.mt <= mt_max & md$percent.ribo <= 50 & md$percent.hb <= 1 & md$doublet == "singlet"
+obj <- subset(obj, cells = rownames(md)[keep])
+p_after <- VlnPlot(obj, qc_feats, group.by = "label", pt.size = 0, ncol = 5) & rot & labs(x = NULL)
+ggsave(file.path(fig, "step00_02_qc_violin_after_filter.pdf"), p_after, width = 18, height = 5)
+p_after
+qc <- data.frame(sample = md$sample, keep) |> group_by(sample) |> summarise(before = n(), after = sum(keep), pct_kept = round(100 * mean(keep), 1)) |> mutate(label = labs_of(sample), .after = sample)
+write.csv(qc, file.path(tab, "step00_cells_per_sample.csv"), row.names = FALSE)
+qc
+```
+
+## Normalise, variable genes, scale, PCA
+
+```{r normalize}
+obj[["RNA"]] <- split(obj[["RNA"]], f = obj$sample)
+obj <- NormalizeData(obj, verbose = FALSE)
+obj <- FindVariableFeatures(obj, nfeatures = 2700, verbose = FALSE)
+VariableFeatures(obj) <- head(drop_ig(VariableFeatures(obj)), 2500)
+
+obj <- ScaleData(obj, verbose = FALSE)
+obj <- RunPCA(obj, npcs = 50, verbose = FALSE)
+p_elbow <- ElbowPlot(obj, ndims = 50)
+ggsave(file.path(fig, "step00_03_pca_elbow.pdf"), p_elbow, width = 6, height = 4)
+p_elbow
+```
+
+## Harmony integration and clustering
+
+```{r integration}
+suppressPackageStartupMessages(library(harmony))
+obj <- IntegrateLayers(obj, method = HarmonyIntegration, orig.reduction = "pca", new.reduction = "harmony", verbose = FALSE)
+obj <- JoinLayers(obj)
+obj <- FindNeighbors(obj, reduction = "harmony", dims = 1:30, verbose = FALSE)
+obj <- FindClusters(obj, resolution = 1, verbose = FALSE)
+obj <- RunUMAP(obj, reduction = "harmony", dims = 1:30, verbose = FALSE)
+obj <- RunUMAP(obj, reduction = "pca", dims = 1:30, reduction.name = "umap_unintegrated", verbose = FALSE)
+obj$seurat_clusters <- obj$RNA_snn_res.1
+Idents(obj) <- obj$seurat_clusters
+p_unint <- DimPlot(obj, reduction = "umap_unintegrated", group.by = "label", shuffle = TRUE, raster = TRUE) + ggtitle("Before integration") + NoLegend()
+p_int <- DimPlot(obj, group.by = "label", shuffle = TRUE, raster = TRUE) + ggtitle("After integration")
+p_batch <- (p_unint | p_int) & labs(x = "UMAP 1", y = "UMAP 2")
+ggsave(file.path(fig, "step00_04_umap_before_after_integration.pdf"), p_batch, width = 13, height = 6)
+p_batch
+table(obj$seurat_clusters)
+```
+
+## Final UMAP
+
+```{r umap}
+p_cl <- DimPlot(obj, label = TRUE, label.size = 4, raster = TRUE) + NoLegend() + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step00_05_umap_clusters.pdf"), p_cl, width = 8, height = 7)
+p_cl
+p_split <- DimPlot(obj, split.by = "label", ncol = 4, raster = TRUE) + NoLegend() + labs(x = "UMAP 1", y = "UMAP 2")
+ggsave(file.path(fig, "step00_06_umap_split_by_sample.pdf"), p_split, width = 16, height = 8)
+p_split
+saveRDS(obj, gfile)
+c(cells = ncol(obj), clusters = nlevels(obj$seurat_clusters))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

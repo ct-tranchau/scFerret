@@ -1,0 +1,803 @@
+loc_id,new_symbol,source,ncbi_product_name
+LOC101675720,AADAC,product_name,arylacetamide deacetylase
+LOC101680908,AAMP,ncbi_ortholog,
+LOC101691019,ABI3BP,ncbi_ortholog,
+LOC101689465,ACRBP,ncbi_ortholog,
+LOC101674572,ADNP,ncbi_ortholog,
+LOC101686178,ADTRP,ncbi_ortholog,
+LOC101678520,AFP,ncbi_ortholog,
+LOC101680325,AGRP,ncbi_ortholog,
+LOC101670474,AGTRAP,ncbi_ortholog,
+LOC101692796,AHSP,ncbi_ortholog,
+LOC101675118,AIP,ncbi_ortholog,
+LOC101694266,AKTIP,ncbi_ortholog,
+LOC101680548,ALG10,ncbi_ortholog,
+LOC101680565,ALOX5AP,ncbi_ortholog,
+LOC101687101,AMBP,ncbi_ortholog,
+LOC101682821,ANPEP,ncbi_ortholog,
+LOC101693255,ANXA8,product_name,annexin A8
+LOC101694623,AOX2P,product_name,aldehyde oxidase 2
+LOC101690745,APBB1IP,ncbi_ortholog,
+LOC101685991,APIP,ncbi_ortholog,
+LOC101671220,APMAP,ncbi_ortholog,
+LOC106004895,APOL2,product_name,apolipoprotein L2-like
+LOC101689973,APOLTP,ncbi_ortholog,
+LOC101686001,APP,ncbi_ortholog,
+LOC101684416,ARHGAP11A,product_name,rho GTPase-activating protein 11A
+LOC101689803,ARL14EP,ncbi_ortholog,
+LOC101685257,ARL2BP,ncbi_ortholog,
+LOC101686872,ARMCX5-GPRASP2,ncbi_ortholog,
+LOC101681517,ARMCX6,product_name,armadillo repeat containing X-linked 6
+LOC101678631,ASIP,ncbi_ortholog,
+LOC101674217,ATF7,ncbi_ortholog,
+LOC101681817,ATF7IP,ncbi_ortholog,
+LOC101678357,ATP1A2,product_name,sodium/potassium-transporting ATPase subunit alpha-2
+LOC101671444,ATRIP,ncbi_ortholog,
+LOC101684847,AUNIP,ncbi_ortholog,
+LOC101670109,AVP,ncbi_ortholog,
+LOC101673278,BANP,ncbi_ortholog,
+LOC101678001,BCAP29,product_name,B-cell receptor-associated protein 29
+LOC101688359,BCCIP,ncbi_ortholog,
+LOC101686401,BCS1L,ncbi_ortholog,
+LOC101680169,BGLAP,ncbi_ortholog,
+LOC101671386,BLCAP,ncbi_ortholog,
+LOC101672981,BRAP,ncbi_ortholog,
+LOC101687601,BRI3BP,ncbi_ortholog,
+LOC106007309,BSPH1,product_name,binder of sperm protein homolog 1
+LOC101692272,BTN2A2,product_name,butyrophilin subfamily 2 member A2
+LOC101676730,C1QBP,ncbi_ortholog,
+CUNH1orf54,C1orf54,curated,chromosome unknown C1orf54 homolog
+LOC101691651,C20orf203,ncbi_ortholog,
+LOC123394885,C7orf78,ncbi_ortholog,
+LOC101680738,CA1,product_name,carbonic anhydrase 1
+LOC101670555,CACYBP,ncbi_ortholog,
+LOC101681446,CALML3,ncbi_ortholog,
+LOC101677996,CAMP,ncbi_ortholog,
+LOC101683303,CATIP,ncbi_ortholog,
+LOC101677388,CBARP,ncbi_ortholog,
+LOC101676770,CCL4,curated,C-C motif chemokine 4
+LOC101693329,CCR1,ncbi_ortholog,
+LOC101693040,CCR3,curated,C-C chemokine receptor type 3
+LOC106004282,CCSAP,ncbi_ortholog,
+LOC101674167,CD2AP,ncbi_ortholog,
+LOC101670098,CDCA5,product_name,sororin
+LOC101677505,CDH10,product_name,cadherin-10
+LOC101684346,CDKN2AIP,ncbi_ortholog,
+LOC101672667,CEACAM21,product_name,carcinoembryonic antigen-related cell adhesion molecule 21
+LOC101692228,CECR2,ncbi_ortholog,
+LOC101679606,CEMIP,ncbi_ortholog,
+LOC101682685,CENPBD1P,ncbi_ortholog,
+LOC101689077,CENPP,ncbi_ortholog,
+LOC101688284,CFP,ncbi_ortholog,
+LOC101683973,CHERP,ncbi_ortholog,
+LOC101688370,CHST6,product_name,carbohydrate sulfotransferase 6
+LOC101691053,CHTOP,ncbi_ortholog,
+LOC101690472,CILP,ncbi_ortholog,
+LOC101672330,CINP,ncbi_ortholog,
+LOC101676801,CIRBP,ncbi_ortholog,
+LOC101688848,CIRSR,product_name,corepressor interacting with RBPJ 1
+LOC101676160,CLASRP,ncbi_ortholog,
+LOC101683784,CLDN22,product_name,claudin-22
+LOC101684051,CLDN24,ncbi_ortholog,
+LOC101688164,CLMP,ncbi_ortholog,
+LOC101688054,CLPP,ncbi_ortholog,
+LOC101689027,CMIP,ncbi_ortholog,
+LOC101683974,CNBP,ncbi_ortholog,
+LOC101686926,CNP,ncbi_ortholog,
+LOC101672552,CNTN6,product_name,contactin-6
+LOC101679441,COA3,ncbi_ortholog,
+LOC101673909,COA4,ncbi_ortholog,
+LOC101676790,COA5,ncbi_ortholog,
+LOC101683946,COA6,ncbi_ortholog,
+LOC101686264,COA7,ncbi_ortholog,
+LOC101694423,COMP,ncbi_ortholog,
+LOC106003379,CORT,product_name,cortistatin-like
+LOC101672166,COX10,ncbi_ortholog,
+LOC101682452,COX11,ncbi_ortholog,
+LOC101680692,COX14,ncbi_ortholog,
+LOC101683349,COX15,ncbi_ortholog,
+LOC101669993,COX17,ncbi_ortholog,
+LOC101680631,COX18,ncbi_ortholog,
+LOC101687325,COX19,ncbi_ortholog,
+LOC101686662,COX20,ncbi_ortholog,
+LOC101680163,COX4I1,ncbi_ortholog,
+LOC101676075,COX4I2,ncbi_ortholog,
+LOC101679783,COX5A,ncbi_ortholog,
+LOC101684324,COX5B,ncbi_ortholog,
+LOC101679257,COX6A1,ncbi_ortholog,
+LOC106003852,COX6A2,ncbi_ortholog,
+LOC101689659,COX6B1,ncbi_ortholog,
+LOC101670731,COX6B2,ncbi_ortholog,
+LOC101682432,COX7A1,ncbi_ortholog,
+LOC101693652,COX7A2,ncbi_ortholog,
+LOC101672219,COX7A2L,ncbi_ortholog,
+LOC101672021,COX7B,ncbi_ortholog,
+LOC101691909,COX7B2,ncbi_ortholog,
+LOC123390405,COX7C,ncbi_ortholog,
+LOC123387318,COX8A,ncbi_ortholog,
+LOC101670744,CPTP,ncbi_ortholog,
+LOC101670762,CRCP,ncbi_ortholog,
+LOC101681230,CREBBP,ncbi_ortholog,
+LOC101689269,CRHBP,ncbi_ortholog,
+LOC101687507,CRP,product_name,C-reactive protein
+LOC101676190,CRTAP,ncbi_ortholog,
+LOC101670340,CSNK2A2IP,ncbi_ortholog,
+LOC101676408,CT45A8,product_name,cancer/testis antigen family 45 member A8-like
+LOC101689140,CTAG1B,product_name,cancer/testis antigen 1-like
+LOC101682149,CTRC,product_name,chymotrypsin-C
+LOC101694605,CTSG,product_name,cathepsin G
+LOC101678542,CYB561,ncbi_ortholog,
+LOC101684103,CYB561A3,ncbi_ortholog,
+LOC101689371,CYB561D1,ncbi_ortholog,
+LOC101682503,CYB561D2,ncbi_ortholog,
+LOC101691097,CYB5A,ncbi_ortholog,
+LOC101686041,CYB5B,ncbi_ortholog,
+LOC101676039,CYB5D1,ncbi_ortholog,
+LOC101673790,CYB5D2,ncbi_ortholog,
+LOC101679968,CYB5R1,ncbi_ortholog,
+LOC101678986,CYB5R2,ncbi_ortholog,
+LOC101693176,CYB5R3,ncbi_ortholog,
+LOC101688264,CYB5R4,ncbi_ortholog,
+LOC101691030,CYB5RL,ncbi_ortholog,
+LOC101672987,CYBA,ncbi_ortholog,
+LOC101677761,CYBB,ncbi_ortholog,
+LOC101687773,CYBC1,ncbi_ortholog,
+LOC101679032,CYBRD1,ncbi_ortholog,
+LOC101674608,CYC1,ncbi_ortholog,
+LOC101690488,CYCS,ncbi_ortholog,
+LOC101670840,CYP11A1,ncbi_ortholog,
+LOC101671806,CYP17A1,ncbi_ortholog,
+LOC101687608,CYP19A1,ncbi_ortholog,
+LOC101676151,CYP1B1,ncbi_ortholog,
+LOC101686505,CYP20A1,ncbi_ortholog,
+LOC101689319,CYP21A2,ncbi_ortholog,
+LOC101678691,CYP24A1,ncbi_ortholog,
+LOC101694189,CYP26A1,ncbi_ortholog,
+LOC101687368,CYP26B1,ncbi_ortholog,
+LOC101694458,CYP26C1,ncbi_ortholog,
+LOC101690391,CYP27A1,ncbi_ortholog,
+LOC101674682,CYP27B1,ncbi_ortholog,
+LOC101672135,CYP27C1,ncbi_ortholog,
+LOC101672586,CYP2D6,ncbi_ortholog,
+LOC101673971,CYP2E1,ncbi_ortholog,
+LOC101684683,CYP2J2,ncbi_ortholog,
+LOC101694301,CYP2R1,ncbi_ortholog,
+LOC101673075,CYP2S1,ncbi_ortholog,
+LOC101691931,CYP2U1,ncbi_ortholog,
+LOC101688654,CYP2W1,ncbi_ortholog,
+LOC101676932,CYP39A1,ncbi_ortholog,
+LOC101688078,CYP46A1,ncbi_ortholog,
+LOC101675446,CYP4B1,ncbi_ortholog,
+LOC101694333,CYP4F22,ncbi_ortholog,
+LOC101684052,CYP4V2,ncbi_ortholog,
+LOC101671415,CYP51A1,ncbi_ortholog,
+LOC101675165,CYP7A1,ncbi_ortholog,
+LOC101686726,CYP7B1,ncbi_ortholog,
+LOC101678059,CYP8B1,ncbi_ortholog,
+LOC101682836,CYTIP,ncbi_ortholog,
+LOC101675309,DAB2IP,ncbi_ortholog,
+LOC101683586,DAP,ncbi_ortholog,
+LOC101675367,DBP,ncbi_ortholog,
+LOC101674292,DCSTAMP,ncbi_ortholog,
+LOC101683606,DDT,ncbi_ortholog,
+LOC101670438,DHRS4,product_name,dehydrogenase/reductase SDR family member 4
+LOC101682266,DNMBP,ncbi_ortholog,
+LOC101681093,DNPEP,ncbi_ortholog,
+LOC101676103,DSP,ncbi_ortholog,
+LOC101673956,DSPP,ncbi_ortholog,
+LOC101674502,EAPP,ncbi_ortholog,
+LOC101671225,EBP,ncbi_ortholog,
+LOC101687216,EIF3C,product_name,eukaryotic translation initiation factor 3 subunit C
+LOC101684702,ELANE,ncbi_ortholog,
+LOC101682177,ENPEP,ncbi_ortholog,
+LOC101686149,EPPIN-WFDC6,ncbi_ortholog,
+LOC101681655,ERMAP,ncbi_ortholog,
+LOC101686444,FABP9,product_name,fatty acid-binding protein 9
+LOC101674189,FAP,ncbi_ortholog,
+LOC101674087,FBXO6,product_name,F-box only protein 6
+LOC101690256,FCGBP,ncbi_ortholog,
+LOC101680253,FCGR3A,curated,low affinity immunoglobulin gamma Fc region receptor III
+LOC123392058,FDCSP,ncbi_ortholog,
+LOC101670497,FIBP,ncbi_ortholog,
+LOC101672499,FKRP,ncbi_ortholog,
+LOC101694141,FLG2,product_name,filaggrin-2-like
+LOC101684879,FN3KRP,ncbi_ortholog,
+LOC101688243,FOLR2,product_name,folate receptor beta
+LOC101690915,FRA10AC1,ncbi_ortholog,
+LOC106003334,FSBP,ncbi_ortholog,
+LOC101675535,GABARAP,ncbi_ortholog,
+LOC101671235,GABRG3,product_name,gamma-aminobutyric acid type A receptor subunit gamma3
+LOC101673788,GABRP,ncbi_ortholog,
+LOC106005447,GALNT4,ncbi_ortholog,
+LOC101673280,GALP,ncbi_ortholog,
+LOC101673948,GBP1,product_name,guanylate-binding protein 1
+LOC101694586,GFAP,ncbi_ortholog,
+LOC101692325,GH1,product_name,somatotropin
+LOC101675359,GIMAP8,product_name,GTPase IMAP family member 8
+LOC101674551,GIP,ncbi_ortholog,
+LOC101678158,GLMP,ncbi_ortholog,
+LOC101687804,GLTP,ncbi_ortholog,
+LOC101678179,GMIP,ncbi_ortholog,
+LOC101672225,GNRH2,ncbi_ortholog,
+LOC101673383,GRAP,ncbi_ortholog,
+LOC101694110,GRID2IP,ncbi_ortholog,
+LOC101692309,GRP,ncbi_ortholog,
+LOC101687840,GSAP,ncbi_ortholog,
+LOC101691322,GSKIP,ncbi_ortholog,
+LOC101693435,GSTA2,product_name,glutathione S-transferase A2
+LOC101687538,GSTK1,product_name,glutathione S-transferase kappa 1
+LOC123392536,GSTM1,product_name,glutathione S-transferase Mu 1
+LOC101683542,GSTO2,product_name,glutathione S-transferase omega-2
+LOC101685649,GSTT1,product_name,glutathione S-transferase theta-1
+LOC101686134,GSTT2B,product_name,glutathione S-transferase theta-2B
+LOC101685339,GSTT4,product_name,glutathione S-transferase theta-4
+LOC101693455,GZMB,curated,granzyme B
+LOC101682832,H1-0,ncbi_ortholog,
+LOC123387238,H1-10,ncbi_ortholog,
+LOC101677409,H1-7,ncbi_ortholog,
+LOC101685726,H1-8,ncbi_ortholog,
+LOC101679867,H2AC1,ncbi_ortholog,
+LOC101670332,H2AC21,ncbi_ortholog,
+LOC101687998,H2AC25,ncbi_ortholog,
+LOC123392650,H2AC6,ncbi_ortholog,
+LOC101681523,H2AJ,ncbi_ortholog,
+LOC101686090,H2AP,ncbi_ortholog,
+LOC101693436,H2AX,ncbi_ortholog,
+LOC106005408,H2AZ1,ncbi_ortholog,
+LOC101681550,H2AZ2,ncbi_ortholog,
+LOC101672430,H2BC1,ncbi_ortholog,
+LOC101692158,H2BC12,ncbi_ortholog,
+LOC101688297,H2BC26,ncbi_ortholog,
+LOC123392660,H2BC3,ncbi_ortholog,
+LOC123392655,H2BC4,ncbi_ortholog,
+LOC123392657,H2BC5,ncbi_ortholog,
+LOC101686884,H3-3A,ncbi_ortholog,
+LOC101675486,H3-3B,ncbi_ortholog,
+LOC101687717,H3-4,ncbi_ortholog,
+LOC101676305,H3C1,ncbi_ortholog,
+LOC101671045,H3C10,ncbi_ortholog,
+LOC106004309,H3C2,ncbi_ortholog,
+LOC123392664,H4C1,ncbi_ortholog,
+LOC101681255,H4C16,ncbi_ortholog,
+LOC123392663,H4C2,ncbi_ortholog,
+LOC123392668,H4C9,ncbi_ortholog,
+LOC101683016,HAMP,ncbi_ortholog,
+LOC101674685,HAPSTR2,ncbi_ortholog,
+LOC101682029,HCCS,ncbi_ortholog,
+LOC101679820,HDLBP,ncbi_ortholog,
+LOC101677400,HHIP,ncbi_ortholog,
+LOC101693730,HINFP,ncbi_ortholog,
+LOC101689074,HIRA,ncbi_ortholog,
+LOC101676508,HJURP,ncbi_ortholog,
+LOC101675687,HLA-DMA,ncbi_ortholog,
+LOC101674777,HLA-DMB,ncbi_ortholog,
+LOC101677272,HLA-DOA,ncbi_ortholog,
+LOC123390639,HLA-DOB,ncbi_ortholog,
+LOC101678035,HLA-DPA1,ncbi_ortholog,
+LOC101692672,HP,product_name,haptoglobin
+LOC101679878,HPF1,ncbi_ortholog,
+LOC101671862,HS3ST3B1,product_name,heparan sulfate glucosamine 3-O-sulfotransferase 3B1
+LOC101683404,HSF2BP,ncbi_ortholog,
+LOC123394009,HSFY1,product_name,"heat shock transcription factor, Y-linked-like"
+LOC101670543,HSPA1L,ncbi_ortholog,
+LOC101681380,HYAL4,product_name,hyaluronidase 4
+LOC123389992,IAPP,ncbi_ortholog,
+LOC101673394,IBSP,ncbi_ortholog,
+LOC101692059,IFI44,curated,interferon-induced protein 44
+LOC101675733,IFIT1,product_name,interferon-induced protein with tetratricopeptide repeats 1
+LOC101675223,IFIT1B,product_name,interferon-induced protein with tetratricopeptide repeats 1B
+LOC123388108,IFITM1,product_name,interferon-induced transmembrane protein 1-like
+LOC101678795,IFNA14,product_name,interferon alpha-14-like
+LOC101681174,IGHA2,curated,immunoglobulin heavy constant alpha 2
+LOC101692462,IGHD,curated,immunoglobulin heavy constant delta
+LOC101680894,IGHE,curated,immunoglobulin heavy constant epsilon
+LOC123390513,IGHG1,curated,immunoglobulin heavy constant gamma 1
+LOC101692175,IGHG3,curated,Ig gamma-3 chain C region
+LOC101691890,IGHM,curated,Ig mu chain C region
+LOC123390496,IGHV1-69-2,product_name,immunoglobulin heavy variable 1-69-2-like
+LOC101678893,IGHV3-21,product_name,immunoglobulin heavy variable 3-21-like
+LOC123386916,IGHV3-33,product_name,immunoglobulin heavy variable 3-33-like
+LOC101692463,IGHV3-48,product_name,immunoglobulin heavy variable 3-48-like
+LOC101689361,IGIP,ncbi_ortholog,
+LOC101673624,IGKV2-28,product_name,immunoglobulin kappa variable 2-28
+LOC101690781,IGKV3-11,product_name,immunoglobulin kappa variable 3-11-like
+LOC106004805,IGKV3-20,product_name,immunoglobulin kappa variable 3-20-like
+LOC101689439,IGLC7,curated,immunoglobulin lambda constant 7
+LOC101692660,IGLL5,product_name,immunoglobulin lambda-like polypeptide 5
+LOC101686302,IGLV1-40,product_name,immunoglobulin lambda variable 1-40-like
+LOC101682133,IGLV3-1,product_name,immunoglobulin lambda variable 3-1-like
+LOC123387653,IGLV3-25,product_name,immunoglobulin lambda variable 3-25-like
+LOC101681541,IGLV4-3,product_name,immunoglobulin lambda variable 4-3-like
+LOC101690503,IKBIP,ncbi_ortholog,
+LOC101693714,IL18BP,ncbi_ortholog,
+LOC101678455,IL18RAP,ncbi_ortholog,
+LOC101683223,IL1RAP,ncbi_ortholog,
+LOC101678790,IL3,ncbi_ortholog,
+LOC101680219,IL36B,product_name,interleukin-36 beta
+LOC101688709,ILKAP,ncbi_ortholog,
+LOC101672396,INCENP,ncbi_ortholog,
+LOC101677271,INIP,ncbi_ortholog,
+LOC101684918,IQCF1,ncbi_ortholog,
+LOC101681626,ITGAV,product_name,integrin alpha-V
+LOC101691488,ITGB3BP,ncbi_ortholog,
+LOC101682357,ITPRIP,ncbi_ortholog,
+LOC101692675,IVNS1ABP,ncbi_ortholog,
+LOC101686022,JKAMP,ncbi_ortholog,
+LOC101677365,JUP,ncbi_ortholog,
+LOC101690780,KCP,ncbi_ortholog,
+LOC101685478,KHSRP,ncbi_ortholog,
+LOC101686782,KLHL27,ncbi_ortholog,
+LOC101691420,KLRC4-KLRK1,ncbi_ortholog,
+LOC101690095,KLRD1,curated,natural killer cells antigen CD94
+LOC101670038,KPRP,ncbi_ortholog,
+LOC101680039,KRT13,product_name,"keratin, type I cytoskeletal 13"
+LOC123393185,KRTAP10-1,product_name,keratin-associated protein 10-1-like
+LOC106006777,KRTAP10-8,product_name,keratin-associated protein 10-8-like
+LOC101692920,KRTAP11-1,ncbi_ortholog,
+LOC101690655,KRTAP13-2,product_name,keratin-associated protein 13-2-like
+LOC123393395,KRTAP15-1,ncbi_ortholog,
+LOC101688354,KRTAP16-1,ncbi_ortholog,
+LOC101683148,KRTAP17-1,ncbi_ortholog,
+LOC123393400,KRTAP19-3,product_name,keratin-associated protein 19-3-like
+LOC123393399,KRTAP19-7,product_name,keratin-associated protein 19-7-like
+LOC123393398,KRTAP20-2,product_name,keratin-associated protein 20-2-like
+LOC101689512,KRTAP24-1,ncbi_ortholog,
+LOC101689812,KRTAP25-1,ncbi_ortholog,
+LOC101690098,KRTAP26-1,ncbi_ortholog,
+LOC101690367,KRTAP27-1,ncbi_ortholog,
+LOC101676247,KRTAP3-1,ncbi_ortholog,
+LOC101676552,KRTAP3-3,product_name,keratin-associated protein 3-3
+LOC101689054,KRTAP4-4,product_name,keratin-associated protein 4-4-like
+LOC123392268,KRTAP4-6,product_name,keratin-associated protein 4-6-like
+LOC101678196,KRTAP4-7,product_name,keratin-associated protein 4-7-like
+LOC123392296,KRTAP4-8,product_name,keratin-associated protein 4-8-like
+LOC101689424,KRTAP6-3,product_name,keratin-associated protein 6-3
+LOC101692620,KRTAP7-1,ncbi_ortholog,
+LOC123393396,KRTAP8-1,ncbi_ortholog,
+LOC123392273,KRTAP9-2,product_name,keratin-associated protein 9-2-like
+LOC101684568,KRTDAP,ncbi_ortholog,
+LOC101690800,LBP,ncbi_ortholog,
+LOC101689643,LEFTY1,product_name,left-right determination factor 1
+LOC123393750,LENEP,ncbi_ortholog,
+LOC101675771,LEP,ncbi_ortholog,
+LOC101671395,LGALS3BP,ncbi_ortholog,
+LOC101694300,LHPP,ncbi_ortholog,
+LOC123390212,LIPF,product_name,gastric triacylglycerol lipase-like
+LOC101682451,LNPEP,ncbi_ortholog,
+LOC123387664,LOC100286986,ncbi_ortholog,
+LOC106004301,LOC100505502,ncbi_ortholog,
+LOC101683274,LOC102723971,ncbi_ortholog,
+LOC106007331,LOC105372412,ncbi_ortholog,
+LOC123389851,LOC112694756,ncbi_ortholog,
+LOC101688921,LOC390877,ncbi_ortholog,
+LOC123394158,LOC730098,ncbi_ortholog,
+LOC101676863,LPP,ncbi_ortholog,
+LOC101673194,LRP2BP,ncbi_ortholog,
+LOC101685818,LSAMP,ncbi_ortholog,
+LOC101675016,LYZL1,ncbi_ortholog,
+LOC101684480,M1AP,ncbi_ortholog,
+LOC101692673,MACROH2A1,ncbi_ortholog,
+LOC101693075,MACROH2A2,ncbi_ortholog,
+LOC101689649,MAD2L1BP,ncbi_ortholog,
+LOC101694136,MAGEA10,product_name,melanoma-associated antigen 10-like
+LOC123394709,MAGEB2,product_name,melanoma-associated antigen B2-like
+LOC101692469,MAGEB4,product_name,melanoma-associated antigen B4-like
+LOC101691025,MBIP,ncbi_ortholog,
+LOC101670298,MBP,ncbi_ortholog,
+LOC101689042,MCM3AP,ncbi_ortholog,
+LOC101684981,MCMBP,ncbi_ortholog,
+LOC101685197,MDP1,product_name,magnesium-dependent phosphatase 1
+LOC101673837,MFRP,ncbi_ortholog,
+LOC101672847,MGAM2,product_name,probable maltase-glucoamylase 2
+LOC101692200,MGARP,ncbi_ortholog,
+LOC101678067,MGP,ncbi_ortholog,
+LOC101690129,MIIP,ncbi_ortholog,
+LOC101693086,MIP,ncbi_ortholog,
+LOC101679652,MIPEP,ncbi_ortholog,
+LOC101687703,MISP,ncbi_ortholog,
+LOC101687967,MLIP,ncbi_ortholog,
+LOC101689304,MLXIP,ncbi_ortholog,
+LOC101688986,MMP1,product_name,interstitial collagenase
+LOC101672187,MMP10,ncbi_ortholog,
+LOC101688701,MMP3,product_name,stromelysin-1
+LOC101678473,MOBP,ncbi_ortholog,
+LOC101678600,MPLKIP,ncbi_ortholog,
+LOC101682008,MPRIP,ncbi_ortholog,
+LOC101670642,MRAP,ncbi_ortholog,
+LOC101688584,MRGBP,ncbi_ortholog,
+LOC101687288,MROH5,ncbi_ortholog,
+LOC101694281,MS4A1,curated,B-lymphocyte antigen CD20
+LOC101692024,MS4A18,product_name,membrane-spanning 4-domains subfamily A member 18-like
+LOC106003567,MS4A4A,product_name,membrane-spanning 4-domains subfamily A member 4A-like
+LOC101694579,MS4A5,product_name,membrane-spanning 4-domains subfamily A member 5
+LOC101687488,MS4A6A,product_name,membrane-spanning 4-domains subfamily A member 6A
+LOC101691103,MS4A8,product_name,membrane-spanning 4-domains subfamily A member 8-like
+LOC106003946,MSANTD7,ncbi_ortholog,
+LOC101681027,MSMP,ncbi_ortholog,
+LOC123389987,MT-ND6,product_name,NADH-ubiquinone oxidoreductase chain 6-like
+LOC101679324,MT4,product_name,metallothionein-4
+LOC101673321,MTAP,ncbi_ortholog,
+LOC101693418,MTBP,ncbi_ortholog,
+LOC101677139,MTHFS,ncbi_ortholog,
+LOC101670359,MTPAP,ncbi_ortholog,
+LOC101687395,MTTP,ncbi_ortholog,
+LOC101678794,MUC3B,product_name,mucin-3B-like
+LOC101671020,MVP,ncbi_ortholog,
+LOC101685641,MYCBP,ncbi_ortholog,
+LOC101691357,MYCBPAP,ncbi_ortholog,
+LOC101675637,MYLIP,ncbi_ortholog,
+LOC101694443,MYPOP,ncbi_ortholog,
+LOC101679873,MYRIP,ncbi_ortholog,
+LOC101674511,MYZAP,ncbi_ortholog,
+LOC101675224,NANP,ncbi_ortholog,
+LOC101686597,NASP,ncbi_ortholog,
+LOC101671731,NAT1,product_name,arylamine N-acetyltransferase 1
+LOC106004407,NBPF19,product_name,NBPF member 19
+LOC101671353,NBPF5P,product_name,putative neuroblastoma breakpoint family member 5
+LOC101685761,NBPF6,product_name,neuroblastoma breakpoint family member 6-like
+LOC101691816,NCMAP,ncbi_ortholog,
+LOC101670751,NCR1,curated,natural cytotoxicity triggering receptor 1
+LOC101673675,NDP,ncbi_ortholog,
+LOC101692992,NDST4,product_name,N-deacetylase and N-sulfotransferase 4
+LOC101681234,NFATC2IP,ncbi_ortholog,
+LOC101674351,NKAP,ncbi_ortholog,
+LOC101681600,NOMO1,product_name,nodal modulator 1
+LOC101670393,NOSIP,ncbi_ortholog,
+LOC101674547,NPAT,ncbi_ortholog,
+LOC101685319,NR2C2AP,ncbi_ortholog,
+LOC101684561,NRAP,ncbi_ortholog,
+LOC123392801,NRARP,ncbi_ortholog,
+LOC101687358,NREP,ncbi_ortholog,
+LOC123387531,NUTM2D,product_name,NUT family member 2D-like
+LOC101675074,NXPE4,ncbi_ortholog,
+LOC101679851,OAS1,curated,2'-5'-oligoadenylate synthase 1
+LOC101672775,OCSTAMP,ncbi_ortholog,
+LOC106003369,OMP,ncbi_ortholog,
+LOC101688630,OOEP,ncbi_ortholog,
+LOC101681824,OR10A4,ncbi_ortholog,
+LOC101678083,OR10A7,ncbi_ortholog,
+LOC101669883,OR10AD1,ncbi_ortholog,
+LOC101670361,OR10G3,ncbi_ortholog,
+LOC101679842,OR10G6,ncbi_ortholog,
+LOC101679548,OR10P1,ncbi_ortholog,
+LOC101684993,OR10Q1,ncbi_ortholog,
+LOC101693366,OR10S1,ncbi_ortholog,
+LOC101681424,OR10T2,ncbi_ortholog,
+LOC101678129,OR10V1,ncbi_ortholog,
+LOC101682879,OR10X1,ncbi_ortholog,
+LOC101683158,OR10Z1,ncbi_ortholog,
+LOC101676368,OR11A1,ncbi_ortholog,
+LOC101673694,OR11L1,ncbi_ortholog,
+LOC101675478,OR13D1,ncbi_ortholog,
+LOC101692836,OR13G1,ncbi_ortholog,
+LOC101686093,OR13H1,ncbi_ortholog,
+LOC123388866,OR14K1,ncbi_ortholog,
+LOC101691473,OR1A1,ncbi_ortholog,
+LOC101681268,OR1B1,ncbi_ortholog,
+LOC101675019,OR1F12P,ncbi_ortholog,
+LOC101684206,OR1G1,ncbi_ortholog,
+LOC101675127,OR1I1,ncbi_ortholog,
+LOC101679273,OR1K1,ncbi_ortholog,
+LOC101680085,OR1N1,ncbi_ortholog,
+LOC101690715,OR2A1,ncbi_ortholog,
+LOC101690157,OR2A7,ncbi_ortholog,
+LOC101683187,OR2AE1,ncbi_ortholog,
+LOC101686261,OR2C1,ncbi_ortholog,
+LOC101678131,OR2K2,ncbi_ortholog,
+LOC123388903,OR2Y1,ncbi_ortholog,
+LOC106003672,OR2Z1,ncbi_ortholog,
+LOC101680910,OR4B1,ncbi_ortholog,
+LOC101681465,OR4C3,ncbi_ortholog,
+LOC101693085,OR4D5,ncbi_ortholog,
+LOC101690337,OR4D6,ncbi_ortholog,
+LOC101692265,OR4E1,ncbi_ortholog,
+LOC101670650,OR4E2,ncbi_ortholog,
+LOC101690007,OR4K14,ncbi_ortholog,
+LOC101676320,OR4K3,ncbi_ortholog,
+LOC101680617,OR4X1,ncbi_ortholog,
+LOC101682329,OR4X2,ncbi_ortholog,
+LOC101681439,OR51B6,ncbi_ortholog,
+LOC101677988,OR51F2,ncbi_ortholog,
+LOC101677690,OR51S1,ncbi_ortholog,
+LOC101677125,OR51T1,ncbi_ortholog,
+LOC101671842,OR51V1,ncbi_ortholog,
+LOC101685412,OR52B2,ncbi_ortholog,
+LOC101692821,OR52B6,ncbi_ortholog,
+LOC101687149,OR52W1,ncbi_ortholog,
+LOC101679742,OR5AC2,ncbi_ortholog,
+LOC106006469,OR5AU1,ncbi_ortholog,
+LOC101688474,OR5B21,ncbi_ortholog,
+LOC101673593,OR5C1,ncbi_ortholog,
+LOC101669937,OR5D18,ncbi_ortholog,
+LOC101685015,OR5J2,ncbi_ortholog,
+LOC101687347,OR5M9,ncbi_ortholog,
+LOC101689826,OR6A2,ncbi_ortholog,
+LOC101688162,OR6B1,ncbi_ortholog,
+LOC101693394,OR6F1,ncbi_ortholog,
+LOC101693745,OR6K2,ncbi_ortholog,
+LOC101684900,OR6K6,ncbi_ortholog,
+LOC101693448,OR6P1,ncbi_ortholog,
+LOC101683863,OR6Q1,ncbi_ortholog,
+LOC101673010,OR6S1,ncbi_ortholog,
+LOC123392164,OR6T1,ncbi_ortholog,
+LOC101685111,OR6V1,ncbi_ortholog,
+LOC101678641,OR6X1,ncbi_ortholog,
+LOC101682579,OR6Y1,ncbi_ortholog,
+LOC101676045,OR7C2,ncbi_ortholog,
+LOC101676976,OR8A1,ncbi_ortholog,
+LOC101686259,OR8B4,ncbi_ortholog,
+LOC101674024,OR8D2,ncbi_ortholog,
+LOC101692329,OR8D4,ncbi_ortholog,
+LOC101685621,OR8K1,ncbi_ortholog,
+LOC101685312,OR8K5,ncbi_ortholog,
+LOC101683872,OR8U3,ncbi_ortholog,
+LOC101688915,OSBP,ncbi_ortholog,
+LOC101693126,OSGEP,ncbi_ortholog,
+LOC101687190,OTP,ncbi_ortholog,
+LOC101685999,PAEP,ncbi_ortholog,
+LOC101679925,PARPBP,ncbi_ortholog,
+LOC106003356,PCDH11X,product_name,protocadherin-11 X-linked
+LOC101671142,PCDH8,product_name,protocadherin-8-like
+LOC123390776,PCDHA1,product_name,protocadherin alpha-1-like
+LOC123390771,PCDHA11,product_name,protocadherin alpha-11-like
+LOC123390770,PCDHA12,product_name,protocadherin alpha-12-like
+LOC101678316,PCDHA13,product_name,protocadherin alpha-13
+LOC106005050,PCDHA3,product_name,protocadherin alpha-3-like
+LOC106005049,PCDHA4,product_name,protocadherin alpha-4-like
+LOC123390775,PCDHA5,product_name,protocadherin alpha-5-like
+LOC101679327,PCDHA6,product_name,protocadherin alpha-6
+LOC123390774,PCDHA7,product_name,protocadherin alpha-7-like
+LOC101676662,PCDHB11,product_name,protocadherin beta-11
+LOC101676372,PCDHB14,product_name,protocadherin beta-14
+LOC123390767,PCDHB16,product_name,protocadherin beta-16-like
+LOC101677254,PCDHB6,product_name,protocadherin beta-6
+LOC123390769,PCDHB7,product_name,protocadherin beta-7-like
+LOC101680238,PCTP,ncbi_ortholog,
+LOC101679153,PDCD6IP,ncbi_ortholog,
+LOC123392944,PDE4DIP,product_name,myomegalin-like
+LOC101692091,PERP,ncbi_ortholog,
+LOC101670710,PET100,ncbi_ortholog,
+LOC101670818,PET117,ncbi_ortholog,
+LOC101675777,PF4,ncbi_ortholog,
+LOC101675626,PFKP,ncbi_ortholog,
+LOC101676026,PGLYRP4,product_name,peptidoglycan recognition protein 4
+LOC101689975,PGP,ncbi_ortholog,
+LOC101687504,PHIP,ncbi_ortholog,
+LOC101678187,PHYHIP,ncbi_ortholog,
+LOC101688141,PIANP,ncbi_ortholog,
+LOC101683702,PIGP,ncbi_ortholog,
+LOC101693993,PINLYP,ncbi_ortholog,
+LOC101679087,PIP,ncbi_ortholog,
+LOC101688275,PKDREJ,product_name,polycystin family receptor for egg jelly
+LOC101684959,PLLP,ncbi_ortholog,
+LOC101679831,PLTP,ncbi_ortholog,
+LOC101672830,PLVAP,ncbi_ortholog,
+LOC101688810,PNKP,ncbi_ortholog,
+LOC101674216,PNLIP,ncbi_ortholog,
+LOC101673471,PNLIPRP2,product_name,pancreatic lipase-related protein 2
+LOC101673292,PNMA6A,product_name,PNMA family member 6A
+LOC101692062,PNP,ncbi_ortholog,
+LOC101685494,POMP,ncbi_ortholog,
+LOC101674939,POR,ncbi_ortholog,
+LOC101686433,PPAN-P2RY11,ncbi_ortholog,
+LOC101676065,PPBP,ncbi_ortholog,
+LOC123389960,PPFIBP1,product_name,liprin-beta-1-like
+LOC101686506,PRAMEF27,product_name,PRAME family member 27
+LOC101682636,PRCP,ncbi_ortholog,
+LOC101686945,PRELP,ncbi_ortholog,
+LOC101674902,PREP,ncbi_ortholog,
+LOC101677643,PRNP,ncbi_ortholog,
+LOC101682507,PRSS44P,product_name,serine protease 44
+LOC101687633,PRSS45P,product_name,putative serine protease 45
+LOC101688883,PRSS50,product_name,serine protease 50
+LOC101684950,PRSS58,product_name,serine protease 58-like
+LOC101684668,PSAP,ncbi_ortholog,
+LOC101688641,PSMC3IP,ncbi_ortholog,
+LOC101672545,PTPRCAP,ncbi_ortholog,
+LOC101674946,PTTG1IP,ncbi_ortholog,
+LOC101686245,PUDP,ncbi_ortholog,
+LOC101672794,PYCARD,product_name,apoptosis-associated speck-like protein containing a CARD
+LOC101686874,PZP,product_name,pregnancy zone protein
+LOC101689621,QRFP,ncbi_ortholog,
+LOC101686171,RAB3IP,ncbi_ortholog,
+LOC101691907,RAP1GAP,ncbi_ortholog,
+LOC123393817,RCOR3,product_name,REST corepressor 3-like
+LOC101685706,RENBP,ncbi_ortholog,
+LOC101691297,RFXAP,ncbi_ortholog,
+LOC101671161,RGS7BP,ncbi_ortholog,
+LOC101672936,RGS9BP,ncbi_ortholog,
+LOC123388549,RHOXF2,product_name,rhox homeobox family member 2-like
+LOC123388527,RHOXF2B,product_name,rhox homeobox family member 2B-like
+LOC101680843,RILP,ncbi_ortholog,
+LOC101671932,RNPEP,ncbi_ortholog,
+LOC101679007,RYBP,ncbi_ortholog,
+LOC101685363,S100P,ncbi_ortholog,
+LOC101674085,S100PBP,ncbi_ortholog,
+LOC101677737,SAP30BP,ncbi_ortholog,
+LOC101671619,SARNP,ncbi_ortholog,
+LOC101682504,SCAP,ncbi_ortholog,
+LOC123387455,SCARNA1,product_name,small Cajal body-specific RNA 1
+LOC123390579,SCARNA13,product_name,small Cajal body-specific RNA 13
+LOC123388259,SCARNA14,product_name,small Cajal body-specific RNA 14
+LOC123388141,SCARNA15,product_name,small Cajal body-specific RNA 15
+LOC123393548,SCARNA16,product_name,small Cajal body-specific RNA 16
+LOC123387699,SCARNA17,product_name,small Cajal body-specific RNA 17
+LOC123392568,SCARNA2,product_name,small Cajal body-specific RNA 2
+LOC123392970,SCARNA21,product_name,small Cajal body-specific RNA 21
+LOC123391261,SCARNA23,product_name,small Cajal body-specific RNA 23
+LOC123389086,SCARNA3,product_name,small Cajal body-specific RNA 3
+LOC123393758,SCARNA4,product_name,small Cajal body-specific RNA 4
+LOC123394655,SCARNA7,product_name,small Cajal body-specific RNA 7
+LOC123392024,SCARNA8,product_name,small Cajal body-specific RNA 8
+LOC101671485,SCGB1D2,product_name,secretoglobin family 1D member 2
+LOC101675431,SCIMP,ncbi_ortholog,
+LOC101677792,SCO1,ncbi_ortholog,
+LOC101685284,SCO2,ncbi_ortholog,
+LOC101674007,SDCBP,ncbi_ortholog,
+LOC101687220,SEC23IP,ncbi_ortholog,
+LOC101672622,SELP,curated,P-selectin
+LOC101676630,SETMAR,ncbi_ortholog,
+LOC101687336,SFSWAP,ncbi_ortholog,
+LOC101691990,SH3BGR,product_name,SH3 domain-binding glutamic acid-rich protein
+LOC123391267,SIGLEC14,product_name,sialic acid-binding Ig-like lectin 14
+LOC101688638,SLBP,ncbi_ortholog,
+LOC101694577,SLC16A1,product_name,monocarboxylate transporter 1
+LOC101677732,SLC22A9,product_name,solute carrier family 22 member 9
+LOC101689910,SLC25A24,product_name,calcium-binding mitochondrial carrier protein SCaMC-1-like
+LOC101682482,SLC4A1AP,ncbi_ortholog,
+LOC101675778,SLC5A4,ncbi_ortholog,
+LOC101692281,SLIRP,ncbi_ortholog,
+LOC101680902,SLMAP,ncbi_ortholog,
+LOC101691098,SLPI,product_name,antileukoproteinase
+LOC101683655,SLX4IP,ncbi_ortholog,
+LOC101684229,SMAGP,ncbi_ortholog,
+LOC123389176,SMIM36,product_name,small integral membrane protein 36-like
+LOC123393734,SMIM42,product_name,small integral membrane protein 42-like
+LOC123392923,SMIM48,ncbi_ortholog,
+LOC101673611,SNCAIP,ncbi_ortholog,
+LOC101671634,SOBP,ncbi_ortholog,
+LOC101693015,SPHKAP,ncbi_ortholog,
+LOC106005046,SPINK6,product_name,serine peptidase inhibitor Kazal type 6
+LOC101693991,SPMIP8,ncbi_ortholog,
+LOC101681201,SPOP,ncbi_ortholog,
+LOC101685489,SRCAP,ncbi_ortholog,
+LOC101686357,SSX2IP,ncbi_ortholog,
+LOC101692862,STAMBP,ncbi_ortholog,
+LOC101691575,STAT5A,product_name,signal transducer and activator of transcription 5A
+LOC101689338,STK11IP,ncbi_ortholog,
+LOC101674419,STRAP,ncbi_ortholog,
+LOC101675217,STRBP,ncbi_ortholog,
+LOC101671645,SURF1,ncbi_ortholog,
+LOC123390777,SURMIR,product_name,SLC35A4 upstream open reading frame protein
+LOC101680819,SVBP,ncbi_ortholog,
+LOC101679955,SVIP,ncbi_ortholog,
+LOC101680071,SVOP,ncbi_ortholog,
+LOC101684509,SYNCRIP,ncbi_ortholog,
+LOC101682224,SYNJ2BP,ncbi_ortholog,
+LOC101688859,SYP,ncbi_ortholog,
+LOC101690988,SYT15,ncbi_ortholog,
+LOC101671671,TAAR3P,product_name,trace amine-associated receptor 3
+LOC101670765,TAAR8,product_name,trace amine-associated receptor 8
+LOC101675887,TACO1,ncbi_ortholog,
+LOC101679335,TAGAP,ncbi_ortholog,
+LOC101683633,TAPBP,ncbi_ortholog,
+LOC101677431,TARDBP,ncbi_ortholog,
+LOC101671127,TAS2R10,product_name,taste receptor type 2 member 10
+LOC101678778,TAS2R39,product_name,taste receptor type 2 member 39
+LOC101684827,TAS2R40,product_name,taste receptor type 2 member 40
+LOC101670827,TAS2R43,product_name,taste receptor type 2 member 43-like
+LOC101672089,TBP,ncbi_ortholog,
+LOC101671461,TCAP,ncbi_ortholog,
+LOC101691778,TCHP,ncbi_ortholog,
+LOC101687509,TERF2IP,ncbi_ortholog,
+LOC101675764,TF,ncbi_ortholog,
+LOC106004694,TFPI2,product_name,tissue factor pathway inhibitor 2
+LOC101677898,THRSP,ncbi_ortholog,
+LOC101681864,TIMM23,ncbi_ortholog,
+LOC101679266,TIPARP,ncbi_ortholog,
+LOC101670804,TIRAP,ncbi_ortholog,
+LOC101682684,TMEM14C,ncbi_ortholog,
+LOC101686293,TMEM202,product_name,transmembrane protein 202-like
+LOC123386902,TMEM217,product_name,transmembrane protein 217-like
+LOC101690562,TMEM276,ncbi_ortholog,
+LOC101674175,TMPRSS11B,product_name,transmembrane protease serine 11B
+LOC101693702,TMPRSS11E,product_name,transmembrane serine protease 11E
+LOC101693146,TMPRSS11F,product_name,transmembrane serine protease 11F
+LOC101683696,TNFSF12,ncbi_ortholog,
+LOC101692173,TOLLIP,ncbi_ortholog,
+LOC101693995,TPPP,ncbi_ortholog,
+LOC123388327,TRAC,curated,T-cell receptor alpha chain C region
+LOC101670658,TRAIP,ncbi_ortholog,
+LOC101684774,TRAT1,ncbi_ortholog,
+LOC101679476,TRAV17,product_name,T cell receptor alpha variable 17-like
+LOC101670342,TRAV18,product_name,T cell receptor alpha variable 18-like
+LOC101679175,TRAV19,product_name,T cell receptor alpha variable 19-like
+LOC101678871,TRAV20,product_name,T cell receptor alpha variable 20-like
+LOC123388331,TRAV21,product_name,T cell receptor alpha variable 21-like
+LOC123388330,TRAV24,product_name,T cell receptor alpha variable 24-like
+LOC123388329,TRAV29DV5,product_name,T cell receptor alpha variable 29/delta variable 5-like
+LOC123388334,TRAV38-2DV8,product_name,T cell receptor alpha variable 38-2/delta variable 8-like
+LOC123388328,TRAV40,product_name,T cell receptor alpha variable 40-like
+LOC101673389,TRAV6,product_name,T cell receptor alpha variable 6-like
+LOC101684255,TRBC1,curated,T cell receptor beta constant 1
+LOC123387055,TRBV12-5,product_name,T cell receptor beta variable 12-5-like
+LOC106004547,TRBV19,product_name,T cell receptor beta variable 19-like
+LOC106004546,TRBV20-1,product_name,T cell receptor beta variable 20-1-like
+LOC123394896,TRBV25-1,product_name,T cell receptor beta variable 25-1-like
+LOC106004551,TRBV27,product_name,T cell receptor beta variable 27-like
+LOC101686578,TRBV3-1,product_name,T cell receptor beta variable 3-1-like
+LOC123387054,TRBV4-1,product_name,T cell receptor beta variable 4-1-like
+LOC101682998,TRBV5-1,product_name,T cell receptor beta variable 5-1-like
+LOC101670626,TRDC,curated,T cell receptor delta constant
+LOC101671122,TRDV3,product_name,T cell receptor delta variable 3-like
+LOC101683812,TRGC1,curated,T cell receptor gamma constant 1
+LOC101691347,TRGC2,curated,T cell receptor gamma constant 2
+LOC101678724,TRIOBP,ncbi_ortholog,
+LOC101680619,TRNAU1AP,ncbi_ortholog,
+LOC101692819,TROAP,ncbi_ortholog,
+LOC101671791,TRPC4AP,ncbi_ortholog,
+LOC101670429,TRRAP,ncbi_ortholog,
+LOC101693525,TSGA10IP,ncbi_ortholog,
+LOC101677509,TSLP,ncbi_ortholog,
+LOC123389978,TUBA1A,ncbi_ortholog,
+LOC101679966,TUBA1C,ncbi_ortholog,
+LOC101688663,TXNIP,ncbi_ortholog,
+LOC106003999,TYMP,ncbi_ortholog,
+LOC101674756,TYROBP,ncbi_ortholog,
+LOC101693202,U2SURP,ncbi_ortholog,
+LOC101676888,ULBP1,product_name,UL16-binding protein 1
+LOC101692773,UQCC1,ncbi_ortholog,
+LOC101690338,UQCC2,ncbi_ortholog,
+LOC101689574,UQCC3,ncbi_ortholog,
+LOC101677535,UQCR10,ncbi_ortholog,
+LOC101690736,UQCR11,ncbi_ortholog,
+LOC101680018,UQCRB,ncbi_ortholog,
+LOC101694055,UQCRC1,ncbi_ortholog,
+LOC101672152,UQCRC2,ncbi_ortholog,
+LOC123390965,UQCRFS1,ncbi_ortholog,
+LOC101681748,UQCRH,ncbi_ortholog,
+LOC101683221,UQCRQ,ncbi_ortholog,
+LOC101692211,VCP,ncbi_ortholog,
+LOC101693104,VIP,ncbi_ortholog,
+LOC101671744,VN1R2,ncbi_ortholog,
+LOC101692964,VPREB1,curated,immunoglobulin iota chain
+LOC101688911,WDCP,ncbi_ortholog,
+LOC101686034,WDPCP,ncbi_ortholog,
+LOC101678331,WTAP,ncbi_ortholog,
+LOC101688227,WTIP,ncbi_ortholog,
+LOC101672337,XCL1,curated,lymphotactin
+LOC101671154,XIAP,ncbi_ortholog,
+LOC101682004,ZAP70,ncbi_ortholog,
+LOC101670017,ZBTB35,product_name,zinc finger protein 131-like
+LOC123386948,ZNF132,product_name,zinc finger protein 132-like
+LOC101670947,ZNF208,product_name,zinc finger protein 208-like
+LOC123386889,ZNF271P,product_name,zinc finger protein 271
+LOC101683920,ZNF28,product_name,zinc finger protein 28 homolog
+LOC101684826,ZNF280A,product_name,zinc finger protein 280A
+LOC106004490,ZNF345,product_name,zinc finger protein 345-like
+LOC101686772,ZNF418,product_name,zinc finger protein 418-like
+LOC106004136,ZNF419,product_name,zinc finger protein 419-like
+LOC106003452,ZNF426,product_name,zinc finger protein 426
+LOC101674446,ZNF475,ncbi_ortholog,
+LOC123391215,ZNF525,product_name,zinc finger protein 525-like
+LOC101691041,ZNF543,product_name,zinc finger protein 543
+LOC101689790,ZNF548,product_name,zinc finger protein 548
+LOC101675009,ZNF555,product_name,zinc finger protein 555
+LOC101689215,ZNF585A,product_name,zinc finger protein 585A-like
+LOC123391219,ZNF615,product_name,zinc finger protein 615-like
+LOC101684833,ZNF626,product_name,zinc finger protein 626-like
+LOC101685314,ZNF658B,product_name,zinc finger protein 658B-like
+LOC101670240,ZNF679,product_name,zinc finger protein 679-like
+LOC101692365,ZNF699,product_name,zinc finger protein 699
+LOC101690924,ZNF705A,product_name,zinc finger protein 705A
+LOC123391206,ZNF708,product_name,zinc finger protein 708-like
+LOC101673698,ZNF717,product_name,zinc finger protein 717-like
+LOC123394136,ZNF73P,product_name,zinc finger protein 73-like
+LOC101683770,ZNF773,product_name,zinc finger protein 773
+LOC101688938,ZNF780A,product_name,zinc finger protein 780A
+LOC101687397,ZNF791,product_name,zinc finger protein 791
+LOC101682010,ZNF814,product_name,zinc finger protein 814-like
+LOC101689775,ZNF85,product_name,zinc finger protein 85-like
+LOC101674467,ZNF862,product_name,zinc finger protein 862
+LOC101688030,ZNG1A,ncbi_ortholog,
+LOC101693045,ZPBP,ncbi_ortholog,

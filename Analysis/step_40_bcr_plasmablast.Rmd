@@ -1,0 +1,93 @@
+---
+title: "Step 40. BCR sharing, isotype and the signs of a response"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds`, which carries the B states from step 15 and the isotype, clone size and IGHV mismatch from step 10.
+Output: figures in `Figures/<run>/`, tables in `Tables/<run>/`. This step only plots, it does not change the object.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## Load the B cells
+
+```{r load}
+obj <- readRDS(gfile)
+b <- sub_umap(obj, colnames(obj)[!is.na(obj$B_subtype_detail)], "b_umap_1", "b_umap_2")
+m <- b@meta.data |> tibble::rownames_to_column("cell")
+mb <- filter(m, has_bcr)
+c(B_cells = nrow(m), with_BCR = nrow(mb), plasmablasts = sum(m$B_subtype_detail == "Plasmablasts"))
+```
+
+## Similar BCRs across the samples
+
+```{r clone_sharing}
+size_class <- function(x) cut(x, c(0, 1, 2, 5, 10, Inf), labels = c("1", "2", "3-5", "6-10", ">10"))
+cs <- mb |> mutate(size = size_class(bcr_clone_size)) |> dplyr::count(label, size) |> group_by(label) |> mutate(frac = n / sum(n)) |> ungroup()
+write.csv(cs, file.path(tab, "step40_clone_size_distribution_per_sample.csv"), row.names = FALSE)
+p_clone <- ggplot(cs, aes(label, frac, fill = size)) + geom_col(colour = "black", linewidth = .15) + scale_fill_brewer(palette = "Oranges", name = "cells per clone") + rot + labs(x = NULL, y = "fraction of BCR+ B cells") + big
+ggsave(file.path(fig, "step40_01_clone_size_distribution.pdf"), p_clone, width = 8, height = 5.5)
+p_clone
+mb |> group_by(label) |> summarise(bcr_cells = n(), clones = n_distinct(bcr_clone), largest_clone = max(bcr_clone_size), pct_single_cell_clones = round(100 * mean(bcr_clone_size == 1), 1))
+```
+
+## Isotype on the B cell UMAP
+
+```{r isotype_umap}
+uall <- as.data.frame(Embeddings(b, "umap")[, 1:2])
+names(uall) <- c("u1", "u2")
+ui <- uall |> mutate(iso = factor(b$isotype, names(iso_cols))) |> filter(!is.na(iso)) |> droplevels()
+nn <- table(ui$iso)
+ilab <- paste0(levels(ui$iso), " (n = ", nn[levels(ui$iso)], ")")
+ui$lab <- factor(ilab[as.integer(ui$iso)], ilab)
+p_iso_umap <- ggplot(ui, aes(u1, u2)) + scattermore::geom_scattermore(data = uall, colour = "grey88", pointsize = 2.5) + geom_point(aes(colour = iso), size = 1.1) + facet_wrap(~ lab, nrow = 1) + scale_colour_manual(values = iso_cols, guide = "none") + labs(x = "UMAP 1", y = "UMAP 2") + coord_fixed() + theme(strip.text = element_text(size = 14), axis.title = element_text(size = 14), axis.text = element_text(size = 11))
+ggsave(file.path(fig, "step40_02_umap_isotype_split.pdf"), p_iso_umap, width = 16, height = 5)
+p_iso_umap
+```
+
+## Isotype per B state
+
+```{r isotype_bars}
+iso <- m |> filter(!is.na(isotype)) |> dplyr::count(B_subtype_detail, isotype) |> group_by(B_subtype_detail) |> mutate(n_bcr = sum(n), frac = n / n_bcr) |> ungroup()
+write.csv(iso, file.path(tab, "step40_isotype_by_B_state.csv"), row.names = FALSE)
+p_iso <- ggplot(iso, aes(B_subtype_detail, frac, fill = factor(isotype, names(iso_cols)))) + geom_col(colour = "black", linewidth = .15) + geom_text(data = distinct(iso, B_subtype_detail, n_bcr), aes(B_subtype_detail, 1.03, label = n_bcr), inherit.aes = FALSE, size = 2.8) + scale_fill_manual(values = iso_cols, name = "Isotype") + rot + labs(x = NULL, y = "fraction of BCR+ cells (n on top)")
+ggsave(file.path(fig, "step40_03_isotype_by_B_state.pdf"), p_iso, width = 9, height = 5.5)
+p_iso
+```
+
+## IGHV mismatch to germline
+
+```{r shm_violin}
+p_shm <- ggplot(filter(m, !is.na(igh_shm)), aes(B_subtype_detail, 100 * igh_shm, fill = B_subtype_detail)) + geom_violin(scale = "width") + geom_boxplot(width = .12, outlier.shape = NA, fill = "white") + scale_fill_manual(values = bd_cols, guide = "none") + rot + labs(x = NULL, y = "IGHV mismatch to germline (%)")
+ggsave(file.path(fig, "step40_04_SHM_by_B_state.pdf"), p_shm, width = 9, height = 5.5)
+p_shm
+m |> filter(!is.na(igh_shm)) |> group_by(B_subtype_detail) |> summarise(cells = n(), median_pct = round(100 * median(igh_shm), 2))
+```
+
+## Signs of a response
+
+```{r response_signs}
+rs <- m |> mutate(expanded = has_bcr & bcr_clone_size >= 2, switched = has_bcr & isotype %in% c("IgG", "IgA"), mutated = has_bcr & !is.na(igh_shm) & igh_shm >= .01, any_sign = expanded | switched | mutated)
+rs <- rs |> group_by(B_subtype_detail) |> summarise(cells = n(), with_BCR = sum(has_bcr), shared_BCR = sum(expanded), switched_IgG_IgA = sum(switched), mutated_IGHV = sum(mutated), any_sign = sum(any_sign), .groups = "drop")
+rs <- rs |> mutate(across(shared_BCR:any_sign, ~ round(100 * .x / with_BCR, 1), .names = "pct_{.col}"))
+write.csv(rs, file.path(tab, "step40_response_signs_by_B_state.csv"), row.names = FALSE)
+sl <- rs |> select(B_subtype_detail, starts_with("pct_")) |> pivot_longer(-B_subtype_detail, names_to = "sign", values_to = "pct")
+sl$sign <- factor(sub("^pct_", "", sl$sign), c("shared_BCR", "switched_IgG_IgA", "mutated_IGHV", "any_sign"), labels = c("Shared BCR (expanded clone)", "Switched to IgG or IgA", "IGHV mutated (>= 1%)", "Any sign"))
+p_signs <- ggplot(sl, aes(B_subtype_detail, pct, fill = sign)) + geom_col(position = position_dodge(.8), width = .75, colour = "black", linewidth = .15) + geom_text(aes(label = round(pct)), position = position_dodge(.8), vjust = -.4, size = 2.8) + scale_fill_manual(values = c("#FDAE6B", "#E6550D", "#756BB1", "#525252"), name = NULL) + rot + labs(x = NULL, y = "% of BCR+ cells") + theme(legend.position = "bottom")
+ggsave(file.path(fig, "step40_05_response_signs_by_B_state.pdf"), p_signs, width = 11, height = 5.5)
+p_signs
+rs |> select(B_subtype_detail, cells, with_BCR, starts_with("pct_"))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

@@ -1,0 +1,50 @@
+---
+title: "Step 30. BCR and TCR detection on the UMAP"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds`, which already carries the receptor columns attached in step 10.
+Output: figures in `Figures/<run>/`, tables in `Tables/<run>/`. This step only plots, it does not change the object.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## Where the receptors are detected
+
+```{r detection_umap}
+obj <- readRDS(gfile)
+u <- as.data.frame(Embeddings(obj, "umap")[, 1:2])
+names(u) <- c("u1", "u2")
+u$BCR <- obj$has_bcr
+u$TCR <- obj$has_tcr
+ud <- bind_rows(mutate(u, chain = "BCR detected", hit = BCR), mutate(u, chain = "TCR detected", hit = TCR))
+p_det <- ggplot(ud, aes(u1, u2)) + scattermore::geom_scattermore(data = u, colour = "grey88", pointsize = 2.5) + scattermore::geom_scattermore(data = filter(ud, hit), aes(colour = chain), pointsize = 2.5) + facet_wrap(~ chain) + scale_colour_manual(values = c("BCR detected" = "#1F77B4", "TCR detected" = "#2CA02C"), guide = "none") + labs(x = "UMAP 1", y = "UMAP 2") + coord_fixed() + theme(strip.text = element_text(size = 14))
+ggsave(file.path(fig, "step30_01_umap_bcr_tcr_detected.pdf"), p_det, width = 12, height = 6)
+p_det
+c(cells = ncol(obj), with_BCR = sum(obj$has_bcr), with_TCR = sum(obj$has_tcr))
+```
+
+## Detection rate per cell type
+```{r detection_rate}
+rec <- obj@meta.data |> group_by(sample, label, cell_type) |> summarise(cells = n(), with_BCR = sum(has_bcr), with_TCR = sum(has_tcr), .groups = "drop")
+rec <- rec |> mutate(pct_BCR = round(100 * with_BCR / cells, 1), pct_TCR = round(100 * with_TCR / cells, 1))
+write.csv(rec, file.path(tab, "step30_receptor_detection_per_sample_celltype.csv"), row.names = FALSE)
+rl <- rec |> select(label, cell_type, pct_BCR, pct_TCR) |> pivot_longer(c(pct_BCR, pct_TCR), names_to = "chain", values_to = "pct")
+p_rate <- ggplot(rl, aes(label, pct, fill = chain)) + geom_col(position = "dodge", colour = "black", linewidth = .15) + facet_wrap(~ cell_type, ncol = 5) + scale_fill_manual(values = c(pct_BCR = "#1F77B4", pct_TCR = "#2CA02C"), labels = c("BCR", "TCR"), name = NULL) + rot + labs(x = NULL, y = "% of cells with a receptor")
+ggsave(file.path(fig, "step30_02_receptor_detection_per_celltype.pdf"), p_rate, width = 16, height = 7)
+p_rate
+rec |> group_by(cell_type) |> summarise(cells = sum(cells), pct_BCR = round(100 * sum(with_BCR) / sum(cells), 1), pct_TCR = round(100 * sum(with_TCR) / sum(cells), 1))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

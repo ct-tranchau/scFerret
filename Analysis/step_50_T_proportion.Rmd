@@ -1,0 +1,39 @@
+---
+title: "Step 50. T cell proportions per sample"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds`, which carries the T cell states from step 15.
+Output: figures in `Figures/<run>/`, tables in `Tables/<run>/`. This step only plots, it does not change the object.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## T cell states
+
+```{r t_bars}
+obj <- readRDS(gfile)
+tc <- sub_umap(obj, colnames(obj)[!is.na(obj$T_subtype)], "t_umap_1", "t_umap_2")
+tcn <- count_frac(tc@meta.data, "T_subtype")
+write.csv(tcn, file.path(tab, "step50_T_state_counts_per_sample.csv"), row.names = FALSE)
+p_t <- lab_bars(tcn, "T_subtype", t_cols, min_frac = .04) & big
+ggsave(file.path(fig, "step50_01_T_state_counts_fractions_per_sample.pdf"), p_t, width = 14, height = 6)
+p_t
+p_tumap <- DimPlot(tc, group.by = "T_subtype", cols = t_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step50_02_umap_T_states.pdf"), p_tumap, width = 9, height = 7)
+p_tumap
+tcn |> group_by(T_subtype) |> summarise(cells = sum(n), pct_of_T = round(100 * sum(n) / sum(tcn$n), 1))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```

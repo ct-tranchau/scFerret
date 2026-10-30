@@ -1,0 +1,82 @@
+---
+title: "Step 15. B and T subclustering, the detailed states"
+date: "2026-10-20"
+output:
+  html_document:
+    toc: true
+    toc_float: true
+---
+
+Input: `Working/objects_<run>/global.rds` from step 10.
+Output: the same `Working/objects_<run>/global.rds`, now carrying `B_subtype_detail`, `T_subtype` and the two subset UMAPs, figures in `Figures/<run>/`.
+
+The global clustering cannot separate the detailed states, because its variable genes are chosen across all cell types and are dominated by the differences between lineages.
+Taking the B cells alone and redoing variable genes, PCA, Harmony and clustering on them is what resolves Immature from Naive and Unswitched from Switched memory.
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = if (basename(getwd()) == "Analysis") normalizePath("..") else getwd())
+knitr::opts_chunk$set(message = FALSE, warning = FALSE)
+source(if (file.exists("_setup.R")) "_setup.R" else "Analysis/_setup.R")
+```
+
+## B cells
+
+```{r b_subclustering}
+obj <- readRDS(gfile)
+b <- recluster(subset(obj, cell_type == "B cells"), res = 1)
+a1 <- b_rules(b)
+b <- recluster(subset(b, cells = colnames(b)[a1$detail[match(b$seurat_clusters, a1$cluster)] != "Doublets"]), res = 1.5)
+ann_b <- b_rules(b)
+write.csv(ann_b, file.path(tab, "step15_B_cluster_evidence.csv"), row.names = FALSE)
+b$B_subtype_detail <- factor(ann_b$detail[match(b$seurat_clusters, ann_b$cluster)], names(bd_cols))
+b <- subset(b, cells = colnames(b)[b$B_subtype_detail != "Doublets"])
+b$B_subtype_detail <- droplevels(b$B_subtype_detail)
+p_b <- DimPlot(b, group.by = "B_subtype_detail", cols = bd_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step15_01_umap_B_states.pdf"), p_b, width = 9, height = 7)
+p_b
+p_bdot <- dotp(b, b_dot, "B_subtype_detail")
+ggsave(file.path(fig, "step15_02_dotplot_B_states.pdf"), p_bdot, width = 17, height = 6)
+p_bdot
+table(b$B_subtype_detail)
+```
+
+## T and NK cells
+
+```{r t_subclustering}
+tc <- recluster(subset(obj, cell_type %in% c("CD4 T cells", "CD8 T cells", "NK cells", "Gamma delta T cells")), res = 1)
+a1 <- t_rules(tc)
+tc <- recluster(subset(tc, cells = colnames(tc)[a1$T_subtype[match(tc$seurat_clusters, a1$cluster)] != "Doublets"]), res = 1.5)
+ann_t <- t_rules(tc)
+write.csv(ann_t, file.path(tab, "step15_T_cluster_evidence.csv"), row.names = FALSE)
+tc$T_subtype <- factor(ann_t$T_subtype[match(tc$seurat_clusters, ann_t$cluster)], names(t_cols))
+tc <- subset(tc, cells = colnames(tc)[tc$T_subtype != "Doublets"])
+tc$T_subtype <- droplevels(tc$T_subtype)
+p_t <- DimPlot(tc, group.by = "T_subtype", cols = t_cols, label = TRUE, repel = TRUE, label.size = 4, raster = TRUE) + ggtitle(NULL) + labs(x = "UMAP 1", y = "UMAP 2") + big
+ggsave(file.path(fig, "step15_03_umap_T_states.pdf"), p_t, width = 9, height = 7)
+p_t
+p_tdot <- dotp(tc, t_dot, "T_subtype")
+ggsave(file.path(fig, "step15_04_dotplot_T_states.pdf"), p_tdot, width = 14, height = 5.5)
+p_tdot
+table(tc$T_subtype)
+```
+
+## Write the states back into the global object
+
+```{r merge_back}
+eb <- Embeddings(b, "umap")[, 1:2]
+et <- Embeddings(tc, "umap")[, 1:2]
+obj$B_subtype_detail <- factor(as.character(b$B_subtype_detail)[match(colnames(obj), colnames(b))], levels(b$B_subtype_detail))
+obj$T_subtype <- factor(as.character(tc$T_subtype)[match(colnames(obj), colnames(tc))], levels(tc$T_subtype))
+obj$b_umap_1 <- unname(eb[match(colnames(obj), rownames(eb)), 1])
+obj$b_umap_2 <- unname(eb[match(colnames(obj), rownames(eb)), 2])
+obj$t_umap_1 <- unname(et[match(colnames(obj), rownames(et)), 1])
+obj$t_umap_2 <- unname(et[match(colnames(obj), rownames(et)), 2])
+saveRDS(obj, gfile)
+c(cells = ncol(obj), B_states = sum(!is.na(obj$B_subtype_detail)), T_states = sum(!is.na(obj$T_subtype)))
+```
+
+## Session info
+
+```{r session}
+sessionInfo()
+```
