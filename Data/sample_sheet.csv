@@ -1,9 +1,0 @@
-sample,label,pool,ocm,animal,group,tissue,timepoint
-Pool_1_OB1,Egg_666A_V1,Pool_1,OB1,666A,Egg,PBMC,PostV1
-Pool_1_OB2,Egg_T5896A_V1,Pool_1,OB2,T5896A,Egg,PBMC,PostV1
-Pool_1_OB3,Egg_666A_V2,Pool_1,OB3,666A,Egg,PBMC,PostV2
-Pool_1_OB4,Egg_T5896A_V2,Pool_1,OB4,T5896A,Egg,PBMC,PostV2
-Pool_2_OB1,Cell_172C_V1,Pool_2,OB1,172C,Cell,PBMC,PostV1
-Pool_2_OB2,Cell_T5899C_V1,Pool_2,OB2,T5899C,Cell,PBMC,PostV1
-Pool_2_OB3,Cell_172C_V2,Pool_2,OB3,172C,Cell,PBMC,PostV2
-Pool_2_OB4,Cell_T5899C_V2,Pool_2,OB4,T5899C,Cell,PBMC,PostV2
